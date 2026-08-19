@@ -1,0 +1,4 @@
+interface:
+  display_name: "Rebuttal Critic"
+  short_description: "Strictly audit rebuttal drafts"
+  default_prompt: "Use $rebuttal-critic to strictly review my rebuttal draft against the paper and reviews."

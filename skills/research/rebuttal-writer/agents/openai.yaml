@@ -1,0 +1,4 @@
+interface:
+  display_name: "Rebuttal Writer"
+  short_description: "Write grounded academic rebuttals"
+  default_prompt: "Use $rebuttal-writer to draft an AC-facing rebuttal from my paper and reviewer comments."

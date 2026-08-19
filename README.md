@@ -10,11 +10,23 @@
 | --- | --- | --- | --- |
 | Research | `ccfa-paper-figures` | CCF-A/顶会论文数据图、架构图与 camera-ready 审查 | 自维护 |
 | Research | `scientific-figure-generator` | AI/CS 论文科研示意图生成 | [Deepshare-Official/CCF-Figure](https://github.com/Deepshare-Official/CCF-Figure) |
+| Research | `rebuttal-writer` | 基于论文、审稿意见和证据撰写学术 rebuttal | 自维护 |
+| Research | `rebuttal-critic` | 严格审查 rebuttal 的覆盖、证据、语气和 AC 说服力 | 自维护 |
 | Documents | `docx-polish-pipeline` | Markdown/草稿到 DOCX/PDF 的精修管线 | 自维护 |
 | Browser | `ego-browser` | ego-lite 浏览器自动化 | [citrolabs/ego-lite](https://github.com/citrolabs/ego-lite) |
 | Browser | `playwright` | Playwright 浏览器测试与抓取 | Microsoft/OpenAI 分发版本 |
 | Operations | `remote-codex-update` | 无外网 Linux 远端的 Codex 离线更新 | 自维护，公开版已脱敏 |
+| Integrations | `collaborating-with-gemini-cli` | 通过 JSON bridge 调用 Gemini CLI 进行复核、调试和方案比较 | [ZhenHuangLab/collaborating-with-gemini-cli](https://github.com/ZhenHuangLab/collaborating-with-gemini-cli) |
+| Presentations | `gpt-image2-ppt` | 使用 gpt-image-2、风格库或用户模板生成高分辨率 PPT | [JuneYaooo/gpt-image2-ppt-skills](https://github.com/JuneYaooo/gpt-image2-ppt-skills) |
 | Frontend | `frontend-ui-standards` | 跨框架前端规范与组件复用 | 自维护 |
+| Frontend | `create-adaptable-composable` | 创建支持值、ref 和 getter 的 Vue composable | [vuejs-ai/skills](https://github.com/vuejs-ai/skills) |
+| Frontend | `vue-best-practices` | Vue 3、Composition API、TypeScript 和 SSR 主规范 | [vuejs-ai/skills](https://github.com/vuejs-ai/skills) |
+| Frontend | `vue-debug-guides` | Vue 3 运行时、响应式、异步和 hydration 排错 | [vuejs-ai/skills](https://github.com/vuejs-ai/skills) |
+| Frontend | `vue-jsx-best-practices` | Vue JSX/TSX 语法和配置规范 | [vuejs-ai/skills](https://github.com/vuejs-ai/skills) |
+| Frontend | `vue-options-api-best-practices` | Vue 3 Options API 和 TypeScript 规范 | [vuejs-ai/skills](https://github.com/vuejs-ai/skills) |
+| Frontend | `vue-pinia-best-practices` | Pinia store、状态管理和响应式模式 | [vuejs-ai/skills](https://github.com/vuejs-ai/skills) |
+| Frontend | `vue-router-best-practices` | Vue Router 4 和导航守卫规范 | [vuejs-ai/skills](https://github.com/vuejs-ai/skills) |
+| Frontend | `vue-testing-best-practices` | Vitest、Vue Test Utils 和 Playwright 测试模式 | [vuejs-ai/skills](https://github.com/vuejs-ai/skills) |
 | Frontend | `ui-craft` | UI 设计与实现的主工作流 | [educlopez/ui-craft](https://github.com/educlopez/ui-craft) |
 | Frontend | `ui-craft-dense-dashboard` | 高密度后台和数据工具 | [educlopez/ui-craft](https://github.com/educlopez/ui-craft) |
 | Frontend | `audit` | 可访问性、性能与响应式审计 | [educlopez/ui-craft](https://github.com/educlopez/ui-craft) |
@@ -27,6 +39,8 @@
 | Frontend | `ui-ux-pro-max` | UI/UX 样式、配色、字体和图表数据库 | [nextlevelbuilder/ui-ux-pro-max-skill](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) |
 
 `ui-craft` 系列保持在同一分类目录中，因为子 skill 会读取 `ui-craft/references/`。安装 `audit`、`tokens`、`finalize` 等子 skill 时，应同时安装 `ui-craft`。
+
+`collaborating-with-gemini-cli` 需要已安装并完成认证的 Gemini CLI。`gpt-image2-ppt` 需要 Python 3.8+、其目录中 `requirements.txt` 列出的依赖，以及通过进程环境或框架密钥管理注入的 OpenAI API 凭据；仓库不存储 `.env` 或真实密钥。
 
 ## 新机器安装
 
@@ -131,13 +145,13 @@ Codex 通常会自动发现新安装的 skill；若未出现，重启 Codex。�
 
 发布前执行以下检查：
 
-- 17 个 `SKILL.md` 均存在且能被递归发现；
+- 29 个 `SKILL.md` 均存在且能被递归发现；
 - 公开内容不包含私钥、Token、密码或真实 API Key；
 - `remote-codex-update` 的公开版本不包含个人主机名、用户名、内网地址或个人目录；
 - 安装脚本在隔离目标目录中测试，不覆盖现有用户 skills；
 - 第三方许可证和来源记录在 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。
 
-使用当前 `skill-creator` 严格校验器时，14 个 skill 完全通过。以下 3 个保留了上游扩展 frontmatter，因此会收到“额外字段”提示，但仍能被当前 Codex 发现：
+使用当前 `skill-creator` 严格校验器时，26 个 skill 完全通过。以下 3 个保留了上游扩展 frontmatter，因此会收到“额外字段”提示，但仍能被当前 Codex 发现：
 
 - `scientific-figure-generator`：`version`、`platforms`、`author`、`source`；
 - `ui-craft`：`argument-hint`；

@@ -1,0 +1,14 @@
+interface:
+  display_name: "GPT-Image-2 PPT Generator"
+  short_description: "Create polished PPT decks from a topic or an existing .pptx template. Preview one slide first, then output high-res slide images and a 16:9 .pptx."
+  default_prompt: "Make me a 5-slide PPT about [topic]. Pick a fitting style and show me the cover first."
+
+# Trust surface (what the user agrees to when installing this skill):
+#   - Reads process env, platform-injected env, explicit GPT_IMAGE2_PPT_ENV,
+#     and skill-owned .env fallback only; never walks parent project directories.
+#   - Hits exactly the OPENAI_BASE_URL endpoint you set, plus optional
+#     VISION_BASE_URL endpoint you set (only when the caller agent is text-only).
+#   - Downloads images returned by the model API; URLs are printed before
+#     download, capped at 50MB, http/https only.
+#   - Uses PowerPoint / Keynote / LibreOffice when available to render template .pptx -> PNG.
+#   - Writes outputs to <cwd>/{template_renders,template_cache,outputs}/.

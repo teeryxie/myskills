@@ -1,0 +1,4 @@
+interface:
+  display_name: "Remote Codex Update"
+  short_description: "Safely update Codex on offline Linux hosts"
+  default_prompt: "Use $remote-codex-update to inspect and safely update Codex on a network-restricted remote Linux host."

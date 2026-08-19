@@ -1,0 +1,12 @@
+* text=auto
+*.md text eol=lf
+*.sh text eol=lf
+*.ps1 text eol=crlf
+*.py text eol=lf
+*.json text eol=lf
+*.yaml text eol=lf
+*.yml text eol=lf
+
+# Preserve upstream formatting, including Markdown hard breaks.
+skills/frontend/ui-ux-pro-max/** whitespace=-trailing-space
+skills/research/scientific-figure-generator/** whitespace=-trailing-space

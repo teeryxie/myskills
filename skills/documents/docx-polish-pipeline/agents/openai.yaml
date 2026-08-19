@@ -1,0 +1,4 @@
+interface:
+  display_name: "文档润色流水线"
+  short_description: "将草稿生成DOCX/PDF并完成预览、审稿与回修闭环"
+  default_prompt: "Use $docx-polish-pipeline to turn this draft into a polished DOCX/PDF with preview and review loops."

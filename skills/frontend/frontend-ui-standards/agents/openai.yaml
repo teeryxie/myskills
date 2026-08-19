@@ -1,0 +1,6 @@
+interface:
+  display_name: "Frontend UI Standards"
+  short_description: "Design-system-first UI implementation"
+  default_prompt: "Use $frontend-ui-standards to implement this UI change with reusable components, semantic tokens, and consistent layout metrics."
+policy:
+  allow_implicit_invocation: true

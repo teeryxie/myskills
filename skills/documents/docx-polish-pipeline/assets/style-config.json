@@ -1,0 +1,80 @@
+{
+  "default_profile": "formal-business",
+  "profiles": {
+    "formal-business": {
+      "title_font_east_asia": "微软雅黑",
+      "title_font_latin": "Arial",
+      "title_size_pt": 24,
+      "subtitle_size_pt": 12,
+      "body_font_east_asia": "宋体",
+      "body_font_latin": "Times New Roman",
+      "body_size_pt": 11,
+      "heading1_size_pt": 17,
+      "heading2_size_pt": 14,
+      "heading3_size_pt": 12,
+      "title_color_rgb": [23, 54, 93],
+      "heading1_color_rgb": [23, 54, 93],
+      "heading2_color_rgb": [31, 78, 121],
+      "heading3_color_rgb": [44, 87, 126],
+      "header_fill": "DCE6F1",
+      "stripe_fill": "F8FBFE",
+      "header_text_rgb": [31, 78, 121],
+      "page_margins_cm": {
+        "top": 2.2,
+        "bottom": 2.0,
+        "left": 2.4,
+        "right": 2.1
+      }
+    },
+    "formal-report": {
+      "title_font_east_asia": "微软雅黑",
+      "title_font_latin": "Arial",
+      "title_size_pt": 22,
+      "subtitle_size_pt": 11,
+      "body_font_east_asia": "宋体",
+      "body_font_latin": "Times New Roman",
+      "body_size_pt": 11,
+      "heading1_size_pt": 16,
+      "heading2_size_pt": 13,
+      "heading3_size_pt": 12,
+      "title_color_rgb": [32, 55, 100],
+      "heading1_color_rgb": [32, 55, 100],
+      "heading2_color_rgb": [55, 86, 126],
+      "heading3_color_rgb": [70, 97, 133],
+      "header_fill": "E7EEF7",
+      "stripe_fill": "FAFCFE",
+      "header_text_rgb": [32, 55, 100],
+      "page_margins_cm": {
+        "top": 2.3,
+        "bottom": 2.1,
+        "left": 2.5,
+        "right": 2.2
+      }
+    },
+    "technical-clean": {
+      "title_font_east_asia": "微软雅黑",
+      "title_font_latin": "Arial",
+      "title_size_pt": 21,
+      "subtitle_size_pt": 11,
+      "body_font_east_asia": "宋体",
+      "body_font_latin": "Times New Roman",
+      "body_size_pt": 10.8,
+      "heading1_size_pt": 15,
+      "heading2_size_pt": 12.5,
+      "heading3_size_pt": 11.5,
+      "title_color_rgb": [40, 40, 40],
+      "heading1_color_rgb": [40, 40, 40],
+      "heading2_color_rgb": [70, 70, 70],
+      "heading3_color_rgb": [90, 90, 90],
+      "header_fill": "ECECEC",
+      "stripe_fill": "FAFAFA",
+      "header_text_rgb": [45, 45, 45],
+      "page_margins_cm": {
+        "top": 2.0,
+        "bottom": 1.9,
+        "left": 2.2,
+        "right": 2.0
+      }
+    }
+  }
+}

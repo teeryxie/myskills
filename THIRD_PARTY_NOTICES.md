@@ -74,6 +74,9 @@ The following skills are maintained in this collection and do not currently decl
 - `ccfa-paper-figures`
 - `docx-polish-pipeline`
 - `frontend-ui-standards`
+- `latex-paper-en`
+- `latex-thesis-zh`
+- `notion-paper-read`
 - `rebuttal-critic`
 - `rebuttal-writer`
 - `remote-codex-update`

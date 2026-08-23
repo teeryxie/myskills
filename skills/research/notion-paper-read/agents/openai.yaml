@@ -1,0 +1,4 @@
+interface:
+  display_name: "Notion Paper Read"
+  short_description: "Download paper, summarize, and write to Notion DB"
+  default_prompt: "Given a paper title, download the PDF, create a dated local folder, extract key points, and write detailed notes to the Notion 论文笔记 database with subpages."

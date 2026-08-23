@@ -12,6 +12,9 @@
 | Research | `scientific-figure-generator` | AI/CS 论文科研示意图生成 | [Deepshare-Official/CCF-Figure](https://github.com/Deepshare-Official/CCF-Figure) |
 | Research | `rebuttal-writer` | 基于论文、审稿意见和证据撰写学术 rebuttal | 自维护 |
 | Research | `rebuttal-critic` | 严格审查 rebuttal 的覆盖、证据、语气和 AC 说服力 | 自维护 |
+| Research | `latex-paper-en` | 英文学术论文 LaTeX 审查、改写、编译与引用检查 | 自维护 |
+| Research | `latex-thesis-zh` | 中文硕博论文 LaTeX 写作、审查、编译与去 AI 化 | 自维护 |
+| Research | `notion-paper-read` | 下载论文、生成中文精读笔记并写入 Notion | 自维护，公开版已移除个人路径 |
 | Documents | `docx-polish-pipeline` | Markdown/草稿到 DOCX/PDF 的精修管线 | 自维护 |
 | Browser | `ego-browser` | ego-lite 浏览器自动化 | [citrolabs/ego-lite](https://github.com/citrolabs/ego-lite) |
 | Browser | `playwright` | Playwright 浏览器测试与抓取 | Microsoft/OpenAI 分发版本 |
@@ -145,13 +148,13 @@ Codex 通常会自动发现新安装的 skill；若未出现，重启 Codex。�
 
 发布前执行以下检查：
 
-- 29 个 `SKILL.md` 均存在且能被递归发现；
+- 32 个 `SKILL.md` 均存在且能被递归发现；
 - 公开内容不包含私钥、Token、密码或真实 API Key；
 - `remote-codex-update` 的公开版本不包含个人主机名、用户名、内网地址或个人目录；
 - 安装脚本在隔离目标目录中测试，不覆盖现有用户 skills；
 - 第三方许可证和来源记录在 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。
 
-使用当前 `skill-creator` 严格校验器时，26 个 skill 完全通过。以下 3 个保留了上游扩展 frontmatter，因此会收到“额外字段”提示，但仍能被当前 Codex 发现：
+使用当前 `skill-creator` 严格校验器时，29 个 skill 完全通过。以下 3 个保留了上游扩展 frontmatter，因此会收到“额外字段”提示，但仍能被当前 Codex 发现：
 
 - `scientific-figure-generator`：`version`、`platforms`、`author`、`source`；
 - `ui-craft`：`argument-hint`；

@@ -36,6 +36,12 @@ Source: [Deepshare-Official/CCF-Figure](https://github.com/Deepshare-Official/CC
 
 The skill directory contains its upstream MIT `LICENSE` file. Preserve it when redistributing the skill.
 
+## drawio-diagram-builder
+
+Source: [Will-hxw/drawio-diagram-builder-skill](https://github.com/Will-hxw/drawio-diagram-builder-skill), pinned from commit `a922507ccd51815f4e8764846d640a65b5fb6f7e` (version `0.4.1`).
+
+Upstream license: MIT. A copy is stored at `third_party/licenses/Will-hxw-drawio-diagram-builder-skill-MIT.txt`. The bundled Tabler icons retain their own MIT license in the skill directory.
+
 ## playwright
 
 The skill directory contains its upstream Apache License 2.0 `LICENSE.txt` and Microsoft `NOTICE.txt`. Preserve both files when redistributing the skill.

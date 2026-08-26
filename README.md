@@ -9,6 +9,7 @@
 | 分类 | Skill | 用途 | 来源 |
 | --- | --- | --- | --- |
 | Research | `ccfa-paper-figures` | CCF-A/顶会论文数据图、架构图与 camera-ready 审查 | 自维护 |
+| Research | `drawio-diagram-builder` | 创建、复刻和迭代优化可编辑的 draw.io 科研与技术图 | [Will-hxw/drawio-diagram-builder-skill](https://github.com/Will-hxw/drawio-diagram-builder-skill) |
 | Research | `scientific-figure-generator` | AI/CS 论文科研示意图生成 | [Deepshare-Official/CCF-Figure](https://github.com/Deepshare-Official/CCF-Figure) |
 | Research | `rebuttal-writer` | 基于论文、审稿意见和证据撰写学术 rebuttal | 自维护 |
 | Research | `rebuttal-critic` | 严格审查 rebuttal 的覆盖、证据、语气和 AC 说服力 | 自维护 |
@@ -148,13 +149,13 @@ Codex 通常会自动发现新安装的 skill；若未出现，重启 Codex。�
 
 发布前执行以下检查：
 
-- 32 个 `SKILL.md` 均存在且能被递归发现；
+- 33 个 `SKILL.md` 均存在且能被递归发现；
 - 公开内容不包含私钥、Token、密码或真实 API Key；
 - `remote-codex-update` 的公开版本不包含个人主机名、用户名、内网地址或个人目录；
 - 安装脚本在隔离目标目录中测试，不覆盖现有用户 skills；
 - 第三方许可证和来源记录在 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。
 
-使用当前 `skill-creator` 严格校验器时，29 个 skill 完全通过。以下 3 个保留了上游扩展 frontmatter，因此会收到“额外字段”提示，但仍能被当前 Codex 发现：
+使用当前 `skill-creator` 严格校验器时，30 个 skill 完全通过。以下 3 个保留了上游扩展 frontmatter，因此会收到“额外字段”提示，但仍能被当前 Codex 发现：
 
 - `scientific-figure-generator`：`version`、`platforms`、`author`、`source`；
 - `ui-craft`：`argument-hint`；

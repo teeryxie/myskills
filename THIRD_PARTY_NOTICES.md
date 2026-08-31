@@ -58,6 +58,12 @@ Source: [JuneYaooo/gpt-image2-ppt-skills](https://github.com/JuneYaooo/gpt-image
 
 Upstream license: Apache License 2.0. A copy is stored at `third_party/licenses/JuneYaooo-gpt-image2-ppt-skills-Apache-2.0.txt`, and the skill directory also retains its upstream `LICENSE`. This collection includes the skill runtime, styles, recipes, and directly referenced documentation, but excludes upstream repository metadata, development instructions, installer, top-level README, and environment-file example. The installation section and file tree in `SKILL.md` are adapted to this collection's shared installer and curated directory layout; generation behavior remains upstream-derived.
 
+## lark-cli
+
+The locally maintained `lark-ops-control`, `lark-progress-sync`, and `lark-weekly-report-submit` skills depend on the official [larksuite/cli](https://github.com/larksuite/cli). The CLI and its official embedded `lark-*` skills are not vendored in this repository; install them separately from the official npm package. The integration was verified with `@larksuite/cli` version `1.0.92`.
+
+Upstream license: MIT. A copy is stored at `third_party/licenses/larksuite-cli-MIT.txt`.
+
 ## Vue skills
 
 The following skills originate from [vuejs-ai/skills](https://github.com/vuejs-ai/skills), pinned from commit `c9d355ff23f654309dd02006be671859df0a134c`:
@@ -82,6 +88,9 @@ The following skills are maintained in this collection and do not currently decl
 - `frontend-ui-standards`
 - `latex-paper-en`
 - `latex-thesis-zh`
+- `lark-ops-control`
+- `lark-progress-sync`
+- `lark-weekly-report-submit`
 - `notion-paper-read`
 - `rebuttal-critic`
 - `rebuttal-writer`

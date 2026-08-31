@@ -21,6 +21,9 @@
 | Browser | `playwright` | Playwright 浏览器测试与抓取 | Microsoft/OpenAI 分发版本 |
 | Operations | `remote-codex-update` | 无外网 Linux 远端的 Codex 离线更新 | 自维护，公开版已脱敏 |
 | Integrations | `collaborating-with-gemini-cli` | 通过 JSON bridge 调用 Gemini CLI 进行复核、调试和方案比较 | [ZhenHuangLab/collaborating-with-gemini-cli](https://github.com/ZhenHuangLab/collaborating-with-gemini-cli) |
+| Integrations | `lark-ops-control` | 飞书官方 CLI 安装、身份、OAuth 授权和资源权限诊断 | 自维护；依赖 [larksuite/cli](https://github.com/larksuite/cli) |
+| Integrations | `lark-progress-sync` | 跨私聊、群聊、会议和文档提炼进度，经确认后发送 | 自维护；依赖官方 `lark-*` Skills |
+| Integrations | `lark-weekly-report-submit` | 定位周次、填写个人周报、登记小组链接并回读验证 | 自维护；依赖官方 `lark-*` Skills |
 | Presentations | `gpt-image2-ppt` | 使用 gpt-image-2、风格库或用户模板生成高分辨率 PPT | [JuneYaooo/gpt-image2-ppt-skills](https://github.com/JuneYaooo/gpt-image2-ppt-skills) |
 | Frontend | `frontend-ui-standards` | 跨框架前端规范与组件复用 | 自维护 |
 | Frontend | `create-adaptable-composable` | 创建支持值、ref 和 getter 的 Vue composable | [vuejs-ai/skills](https://github.com/vuejs-ai/skills) |
@@ -45,6 +48,14 @@
 `ui-craft` 系列保持在同一分类目录中，因为子 skill 会读取 `ui-craft/references/`。安装 `audit`、`tokens`、`finalize` 等子 skill 时，应同时安装 `ui-craft`。
 
 `collaborating-with-gemini-cli` 需要已安装并完成认证的 Gemini CLI。`gpt-image2-ppt` 需要 Python 3.8+、其目录中 `requirements.txt` 列出的依赖，以及通过进程环境或框架密钥管理注入的 OpenAI API 凭据；仓库不存储 `.env` 或真实密钥。
+
+三个飞书自维护 Skills 需要飞书官方 `lark-cli` 及其随版本内置的官方 `lark-*` Skills。本仓库验证版本为 `1.0.92`：
+
+```bash
+npx @larksuite/cli@1.0.92 install
+```
+
+官方 Skills 不在本仓库重复镜像，以避免和 CLI 自动安装的同名 Skills 冲突。应用密钥、用户/机器人访问令牌、open_id、chat_id、文档 token 和授权链接都只保存在本机或运行时，不进入仓库。安装、授权、能力图和权限边界见 [`lark-ops-control`](skills/integrations/lark-ops-control/SKILL.md)。
 
 ## 新机器安装
 
@@ -138,7 +149,7 @@ git pull --ff-only
 
 1. 在合适的 `skills/<category>/<skill-name>/` 下加入完整 skill 目录。
 2. 确保存在 `SKILL.md`，且 frontmatter 至少包含 `name` 和 `description`。
-3. 不要提交密钥、令牌、Cookie、私有主机名、内网 IP 或个人绝对路径。
+3. 不要提交密钥、令牌、Cookie、飞书应用 ID、open_id、chat_id、文档 token、授权链接、私有主机名、内网 IP 或个人绝对路径。
 4. 运行结构校验和敏感信息扫描。
 5. 更新本 README 的分类表和 `THIRD_PARTY_NOTICES.md`（若来自第三方）。
 6. 提交并推送；其他机器执行 `git pull --ff-only`，再运行安装脚本发现新 skill。
@@ -149,13 +160,13 @@ Codex 通常会自动发现新安装的 skill；若未出现，重启 Codex。�
 
 发布前执行以下检查：
 
-- 33 个 `SKILL.md` 均存在且能被递归发现；
+- 36 个 `SKILL.md` 均存在且能被递归发现；
 - 公开内容不包含私钥、Token、密码或真实 API Key；
 - `remote-codex-update` 的公开版本不包含个人主机名、用户名、内网地址或个人目录；
 - 安装脚本在隔离目标目录中测试，不覆盖现有用户 skills；
 - 第三方许可证和来源记录在 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。
 
-使用当前 `skill-creator` 严格校验器时，30 个 skill 完全通过。以下 3 个保留了上游扩展 frontmatter，因此会收到“额外字段”提示，但仍能被当前 Codex 发现：
+使用当前 `skill-creator` 严格校验器时，33 个 skill 完全通过。以下 3 个保留了上游扩展 frontmatter，因此会收到“额外字段”提示，但仍能被当前 Codex 发现：
 
 - `scientific-figure-generator`：`version`、`platforms`、`author`、`source`；
 - `ui-craft`：`argument-hint`；

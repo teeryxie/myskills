@@ -1,0 +1,3 @@
+interface:
+  display_name: "飞书进度同步"
+  short_description: "跨聊天和会议整理进度并确认发送"

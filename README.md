@@ -21,7 +21,7 @@
 | Browser | `playwright` | Playwright 浏览器测试与抓取 | Microsoft/OpenAI 分发版本 |
 | Operations | `remote-codex-update` | 无外网 Linux 远端的 Codex 离线更新 | 自维护，公开版已脱敏 |
 | Integrations | `collaborating-with-gemini-cli` | 通过 JSON bridge 调用 Gemini CLI 进行复核、调试和方案比较 | [ZhenHuangLab/collaborating-with-gemini-cli](https://github.com/ZhenHuangLab/collaborating-with-gemini-cli) |
-| Integrations | `lark-ops-control` | 飞书官方 CLI 安装、身份、OAuth 授权和资源权限诊断 | 自维护；依赖 [larksuite/cli](https://github.com/larksuite/cli) |
+| Integrations | `lark-ops-control` | 所有飞书任务的 CLI 优先路由，以及身份、OAuth、外部群和资源权限诊断 | 自维护；依赖 [larksuite/cli](https://github.com/larksuite/cli) |
 | Integrations | `lark-progress-sync` | 跨私聊、群聊、会议和文档提炼进度，经确认后发送 | 自维护；依赖官方 `lark-*` Skills |
 | Integrations | `lark-weekly-report-submit` | 定位周次、填写个人周报、登记小组链接并回读验证 | 自维护；依赖官方 `lark-*` Skills |
 | Presentations | `gpt-image2-ppt` | 使用 gpt-image-2、风格库或用户模板生成高分辨率 PPT | [JuneYaooo/gpt-image2-ppt-skills](https://github.com/JuneYaooo/gpt-image2-ppt-skills) |

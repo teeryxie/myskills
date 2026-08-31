@@ -1,3 +1,3 @@
 interface:
   display_name: "飞书 CLI 运维总控"
-  short_description: "安装、身份、授权和资源权限诊断"
+  short_description: "飞书任务默认走 CLI，并诊断身份、授权和外部群限制"

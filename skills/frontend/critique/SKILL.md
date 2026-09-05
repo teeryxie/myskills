@@ -39,7 +39,7 @@ If the user declines to provide screenshots, run a code-only pass and clearly ma
 3. **Hierarchy**: can the user tell what's primary, secondary, tertiary at a glance? Or does everything shout equally?
 4. **Clarity**: is the value prop legible in 5 seconds? Are CTAs specific (not "Learn more")?
 5. **Signature detail**: is there one memorable element that makes this feel designed, not assembled? If not, suggest one (motif, layout break, custom marker, distinctive hover).
-6. **Inspiration gap** — read `references/inspiration.md`: which observed pattern from the archetypes / signature details applies here, and how does the current state diverge from it?
+6. **Inspiration gap** — read `../ui-craft/references/inspiration.md`: which observed pattern from the archetypes / signature details applies here, and how does the current state diverge from it?
 
 **Output format** — the Review Format table:
 
@@ -50,6 +50,6 @@ Prioritize by impact, not by file order. End with a one-paragraph summary of the
 
 Do NOT edit code. This is a critique.
 
-**Close with a Craft Report** (`references/review.md` → Craft Report) as the final wrapper around the findings table and top-3 summary — Checked names the lenses actually run (Anti-Slop, Craft Test, Hierarchy, Clarity, Signature, Inspiration gap) and at what CRAFT_LEVEL bar, Passed carries whatever held up under those lenses, Changed stays empty (critique doesn't edit), Left alone covers anything flagged but out of scope, Verdict is the one-sentence state. Produce it even when the surface passes clean — that's the validation the user is asking for.
+**Close with a Craft Report** (`../ui-craft/references/review.md` → Craft Report) as the final wrapper around the findings table and top-3 summary — Checked names the lenses actually run (Anti-Slop, Craft Test, Hierarchy, Clarity, Signature, Inspiration gap) and at what CRAFT_LEVEL bar, Passed carries whatever held up under those lenses, Changed stays empty (critique doesn't edit), Left alone covers anything flagged but out of scope, Verdict is the one-sentence state. Produce it even when the surface passes clean — that's the validation the user is asking for.
 
 **Next step:** `/polish` — apply the fixes this critique named (rung 1).

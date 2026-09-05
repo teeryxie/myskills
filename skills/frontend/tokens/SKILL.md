@@ -7,7 +7,7 @@ description: "Audit or establish the project's 3-layer token spine. Invoke when 
 
 **Context:** this sub-skill is one lens of the broader `ui-craft` skill. If the `ui-craft` skill is also installed, read its SKILL.md first for Discovery + Anti-Slop + Craft Test, then apply the specific lens below.
 
-Read `references/tokens.md` before proceeding. The 3-layer contract (primitive → semantic → component) and the intentional-dark test are defined there.
+Read `../ui-craft/references/tokens.md` before proceeding. The 3-layer contract (primitive → semantic → component) and the intentional-dark test are defined there.
 
 ---
 
@@ -35,7 +35,7 @@ Build an inventory: which of the 7 categories exist (color / spacing / type / ra
 
 ## Step 3: Audit (tokens exist)
 
-Evaluate against the contract in `references/tokens.md`. Output a severity-ranked gap list — don't propose code yet.
+Evaluate against the contract in `../ui-craft/references/tokens.md`. Output a severity-ranked gap list — don't propose code yet.
 
 Check:
 

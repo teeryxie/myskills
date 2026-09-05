@@ -42,7 +42,7 @@ If the UI is already shouting with color, this command also removes color.
 2. **Mute decorative color.** Background patterns, tinted cards without meaning, colored left borders on every list item, heading gradients, colored pills on every tag → gone.
 3. **Keep semantic, cut decorative.** Status dots, focus rings, active-nav underlines stay. Color as ornament goes.
 
-**References to read**: `references/color.md` (OKLCH, tokens, dark mode, contrast), `references/accessibility.md` (contrast ratios for AA/AAA).
+**References to read**: `../ui-craft/references/color.md` (OKLCH, tokens, dark mode, contrast), `../ui-craft/references/accessibility.md` (contrast ratios for AA/AAA).
 
 **Output**: edit code directly. Lift any literal hex into CSS variables (`--color-accent`, `--color-accent-tint`) — respect existing token naming if present. Print the Review Format table. One row per placement, with the ratio check (AA/AAA) on text uses.
 

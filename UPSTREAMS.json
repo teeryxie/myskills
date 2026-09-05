@@ -1,0 +1,73 @@
+{
+  "checked_at": "2026-09-05",
+  "policy": "Latest upstream default-branch commit at audit time; preserve collection adaptations. App-managed skills and private local skills are not vendored.",
+  "upstreams": [
+    {
+      "repository": "educlopez/ui-craft",
+      "revision": "ceecc8e1fb0c2befda73da996435900d6dd0c1ac",
+      "committed_at": "2026-09-03T09:23:28+02:00",
+      "subject": "chore(friction-log): move to v1.3.1 and install the skill for every harness (#154)"
+    },
+    {
+      "repository": "citrolabs/ego-lite",
+      "revision": "5ca3c36cba2240b8df2e22ba32127747029039d5",
+      "committed_at": "2026-08-24T14:02:34+08:00",
+      "subject": "Merge pull request #317 from citrolabs/docs/star-history-branch"
+    },
+    {
+      "repository": "Deepshare-Official/CCF-Figure",
+      "revision": "37f46a77ba620b2c1e7b722f41b80809f8d958ff",
+      "committed_at": "2026-06-15T14:11:18+08:00",
+      "subject": "Update README.md"
+    },
+    {
+      "repository": "nextlevelbuilder/ui-ux-pro-max-skill",
+      "revision": "f3ac195224eac1eb0dfe1a3059c2a6add78ffbe3",
+      "committed_at": "2026-09-03T21:13:38+07:00",
+      "subject": "docs: remove unimplemented openclaw install command (#483)"
+    },
+    {
+      "repository": "ZhenHuangLab/collaborating-with-gemini-cli",
+      "revision": "5cc88cbe23c3663ca0af73d1578f3315c1d0a4d0",
+      "committed_at": "2026-01-17T15:40:46+08:00",
+      "subject": "docs: Enhance installation instructions and clarify skill triggering in READMEs."
+    },
+    {
+      "repository": "vuejs-ai/skills",
+      "revision": "c9d355ff23f654309dd02006be671859df0a134c",
+      "committed_at": "2026-03-26T06:50:25+01:00",
+      "subject": "Merge pull request #44 from vuejs-ai/sync/dev-to-main-20260326054509"
+    },
+    {
+      "repository": "Will-hxw/drawio-diagram-builder-skill",
+      "revision": "a922507ccd51815f4e8764846d640a65b5fb6f7e",
+      "committed_at": "2026-07-02T08:21:31+08:00",
+      "subject": "do many changes"
+    },
+    {
+      "repository": "JuneYaooo/gpt-image2-ppt-skills",
+      "revision": "2d57ef8127b83e8232a1be4e9515f0b3cc9fc91e",
+      "committed_at": "2026-08-23T07:07:41+08:00",
+      "subject": "fix: enforce safe config and real renderer checks"
+    },
+    {
+      "repository": "openai/skills",
+      "revision": "49f948faa9258a0c61caceaf225e179651397431",
+      "committed_at": "2026-06-23T19:36:12-07:00",
+      "subject": "[codex] Update skill installer post-install guidance (#507)"
+    },
+    {
+      "repository": "Henryhe09/Review2Rebuttal",
+      "revision": "fca72fe58edad92d38a5eb5ce192454353b1a8d3",
+      "committed_at": "2026-03-25T23:59:06+08:00",
+      "subject": "Update README.md"
+    }
+  ],
+  "retained_adaptations": [
+    "Vue frontmatter compatibility metadata",
+    "PPT curated layout and shared installer",
+    "UI UX Pro Max skill-relative invocation paths",
+    "ui-craft sibling reference resolution"
+  ],
+  "skill_count": 56
+}

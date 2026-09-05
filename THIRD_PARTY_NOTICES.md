@@ -6,17 +6,37 @@ This repository is a categorized synchronization collection. It does not apply o
 
 The following skills originate from [educlopez/ui-craft](https://github.com/educlopez/ui-craft):
 
+- `adapt`
+- `animate`
 - `audit`
+- `bolder`
+- `brief`
+- `clarify`
 - `colorize`
+- `craft`
 - `critique`
+- `delight`
+- `distill`
+- `extract`
 - `finalize`
+- `harden`
+- `heuristic`
 - `polish`
+- `quieter`
+- `redesign`
+- `remember`
+- `sddesign`
+- `shape`
+- `start`
 - `tokens`
 - `typeset`
 - `ui-craft`
 - `ui-craft-dense-dashboard`
+- `ui-craft-editorial`
+- `ui-craft-minimal`
+- `unhappy`
 
-Upstream license: MIT. A copy is stored at `third_party/licenses/educlopez-ui-craft-MIT.txt`.
+Pinned from commit `ceecc8e1fb0c2befda73da996435900d6dd0c1ac`. Upstream license: MIT. A copy is stored at `third_party/licenses/educlopez-ui-craft-MIT.txt`. Codex mirrors are used; sub-skill reference paths are adapted to the sibling `ui-craft/references/` directory without duplicating shared documents.
 
 ## ego-browser
 
@@ -26,7 +46,7 @@ Upstream license: MIT. A copy is stored at `third_party/licenses/citrolabs-ego-l
 
 ## ui-ux-pro-max
 
-Source: [nextlevelbuilder/ui-ux-pro-max-skill](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill).
+Source: [nextlevelbuilder/ui-ux-pro-max-skill](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill), pinned from commit `f3ac195224eac1eb0dfe1a3059c2a6add78ffbe3`. Invocation examples use the installed skill directory rather than Claude-only environment variables; data and search logic remain upstream-derived.
 
 Upstream license: MIT. A copy is stored at `third_party/licenses/nextlevelbuilder-ui-ux-pro-max-skill-MIT.txt`.
 
@@ -54,7 +74,7 @@ Upstream license: MIT. A copy is stored at `third_party/licenses/ZhenHuangLab-co
 
 ## gpt-image2-ppt
 
-Source: [JuneYaooo/gpt-image2-ppt-skills](https://github.com/JuneYaooo/gpt-image2-ppt-skills), pinned from commit `4576cd5aee5e2f7c2fbd47557045b150906ce98c`.
+Source: [JuneYaooo/gpt-image2-ppt-skills](https://github.com/JuneYaooo/gpt-image2-ppt-skills), pinned from commit `2d57ef8127b83e8232a1be4e9515f0b3cc9fc91e`.
 
 Upstream license: Apache License 2.0. A copy is stored at `third_party/licenses/JuneYaooo-gpt-image2-ppt-skills-Apache-2.0.txt`, and the skill directory also retains its upstream `LICENSE`. This collection includes the skill runtime, styles, recipes, and directly referenced documentation, but excludes upstream repository metadata, development instructions, installer, top-level README, and environment-file example. The installation section and file tree in `SKILL.md` are adapted to this collection's shared installer and curated directory layout; generation behavior remains upstream-derived.
 

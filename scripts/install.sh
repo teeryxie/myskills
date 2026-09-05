@@ -15,7 +15,8 @@ fi
 
 mkdir -p -- "$destination"
 
-declare -A seen=()
+names=()
+directories=()
 installed=0
 existing=0
 skipped=0
@@ -33,19 +34,22 @@ while IFS= read -r -d '' skill_file; do
     }
   ' "$skill_file")
 
-  if [[ -z $name ]]; then
+  if [[ ! $name =~ ^[a-z0-9][a-z0-9-]{0,63}$ ]]; then
     printf 'Missing or invalid frontmatter name: %s\n' "$skill_file" >&2
     exit 65
   fi
-  if [[ -n ${seen[$name]:-} ]]; then
-    printf 'Duplicate skill name %s: %s and %s\n' "$name" "$skill_dir" "${seen[$name]}" >&2
-    exit 66
-  fi
-  seen[$name]=$skill_dir
+  for ((index = 0; index < ${#names[@]}; index++)); do
+    if [[ ${names[$index]} == "$name" ]]; then
+      printf 'Duplicate skill name %s: %s and %s\n' "$name" "$skill_dir" "${directories[$index]}" >&2
+      exit 66
+    fi
+  done
+  names[${#names[@]}]=$name
+  directories[${#directories[@]}]=$skill_dir
 
   target="$destination/$name"
   if [[ -e $target || -L $target ]]; then
-    if [[ -L $target && $(readlink -f -- "$target") == $(readlink -f -- "$skill_dir") ]]; then
+    if [[ -L $target && -d $target && $(cd -- "$target" && pwd -P) == $(cd -- "$skill_dir" && pwd -P) ]]; then
       printf 'EXISTS %s -> %s\n' "$name" "$skill_dir"
       ((existing += 1))
     else
@@ -65,7 +69,7 @@ while IFS= read -r -d '' skill_file; do
   ((installed += 1))
 done < <(find "$skills_root" -type f -name SKILL.md -print0 | sort -z)
 
-printf 'Skills discovered: %d\n' "${#seen[@]}"
+printf 'Skills discovered: %d\n' "${#names[@]}"
 printf 'Installed: %d; already linked: %d; skipped conflicts: %d\n' "$installed" "$existing" "$skipped"
 
 if (( skipped > 0 )); then

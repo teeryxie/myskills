@@ -47,6 +47,41 @@
 
 `ui-craft` 系列保持在同一分类目录中，因为子 skill 会读取 `ui-craft/references/`。安装 `audit`、`tokens`、`finalize` 等子 skill 时，应同时安装 `ui-craft`。
 
+### 2026-09-05 上游同步
+
+本次按各上游默认分支的固定提交核验，完整版本记录见 [`UPSTREAMS.json`](UPSTREAMS.json)。仓库共包含 **56 个 skills**，并非所有外部 CLI 或运行依赖均已安装。
+
+- `ui-craft` 更新至上述记录中的提交，并补齐新版入口引用的 20 个子技能，完整套件共 29 个。
+- `ui-ux-pro-max` 同步搜索脚本、数据来源记录、字体许可证资料与最新规则；调用路径改为当前 skill 目录，不依赖 Claude 专用变量。
+- `gpt-image2-ppt` 同步显式配置优先级保护、真实回渲染检查与超时处理，保留本仓库的精简安装布局。
+- `ego-browser`、Playwright、Vue、draw.io、科研示意图与 Gemini bridge 经比对无需功能更新；Vue 元数据兼容改动保留。
+- 安装脚本兼容 macOS 自带 Bash 3.2，不再依赖 Bash 4 关联数组或 GNU `readlink -f`。既有目录和其他来源链接仍不会被自动覆盖。
+
+新增子技能如下，均来自 `educlopez/ui-craft`，与主 skill 一起安装：
+
+| Skill | 用途 |
+| --- | --- |
+| `adapt` | 跨设备与断点适配 |
+| `animate` | 交互动效 |
+| `bolder` | 强化视觉表达 |
+| `brief` | 持久化项目设计简报 |
+| `clarify` | 明确信息与交互文案 |
+| `craft` | 按界面类型实施设计 |
+| `delight` | 增加有目的的细节体验 |
+| `distill` | 简化界面与视觉噪声 |
+| `extract` | 提取已有设计约定 |
+| `harden` | 补齐生产状态与边界情形 |
+| `heuristic` | 启发式可用性评审 |
+| `quieter` | 降低视觉强度 |
+| `redesign` | 重新设计既有界面 |
+| `remember` | 记录项目设计修正 |
+| `sddesign` | 编排完整设计流程 |
+| `shape` | 确定设计方向 |
+| `start` | 项目检查与入口路由 |
+| `ui-craft-editorial` | 编辑式版面设计 |
+| `ui-craft-minimal` | 极简设计 |
+| `unhappy` | 检查失败与异常路径 |
+
 `collaborating-with-gemini-cli` 需要已安装并完成认证的 Gemini CLI。`gpt-image2-ppt` 需要 Python 3.8+、其目录中 `requirements.txt` 列出的依赖，以及通过进程环境或框架密钥管理注入的 OpenAI API 凭据；仓库不存储 `.env` 或真实密钥。
 
 三个飞书自维护 Skills 需要飞书官方 `lark-cli` 及其随版本内置的官方 `lark-*` Skills。本仓库验证版本为 `1.0.92`：
@@ -160,19 +195,31 @@ Codex 通常会自动发现新安装的 skill；若未出现，重启 Codex。�
 
 发布前执行以下检查：
 
-- 36 个 `SKILL.md` 均存在且能被递归发现；
+- 56 个 `SKILL.md` 均存在且能被递归发现；
 - 公开内容不包含私钥、Token、密码或真实 API Key；
 - `remote-codex-update` 的公开版本不包含个人主机名、用户名、内网地址或个人目录；
 - 安装脚本在隔离目标目录中测试，不覆盖现有用户 skills；
 - 第三方许可证和来源记录在 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。
 
-使用当前 `skill-creator` 严格校验器时，33 个 skill 完全通过。以下 3 个保留了上游扩展 frontmatter，因此会收到“额外字段”提示，但仍能被当前 Codex 发现：
+使用当前 `skill-creator` 严格校验器时，51 个 skill 完全通过。以下 5 个保留了上游扩展 frontmatter，因此会收到“额外字段”提示；它们的 YAML、必需字段与目录安装另行验证，但不将其标为严格校验通过：
 
 - `scientific-figure-generator`：`version`、`platforms`、`author`、`source`；
 - `ui-craft`：`argument-hint`；
-- `ui-craft-dense-dashboard`：`argument-hint`。
+- `ui-craft-dense-dashboard`：`argument-hint`；
+- `ui-craft-editorial`：`argument-hint`；
+- `ui-craft-minimal`：`argument-hint`。
 
 这些字段来自上游分发格式，本仓库没有为通过单一校验器而静默删除上游元数据。
+
+可运行以下无业务副作用的本地回归检查：
+
+```bash
+uv run --python 3.10 python -m unittest discover -s tests -p 'test_*.py'
+bash tests/dev_1.1.0_20260823.sh
+bash tests/lark-skills.sh
+```
+
+本次额外验证了 `ui-ux-pro-max` 的 130 项可移植运行测试、数据校验与搜索流程。其分发目录还包含 4 个上游仓库开发测试模块（`test_catalog_refresh`、`test_catalog_summary_line_endings`、`test_relevance_evaluator`、`test_skill_script_paths`），依赖上游仓库根目录的生成工具和镜像布局，不适合在本精简集合中直接 discovery；它们未计入通过数量，原文件保留以便追溯。
 
 ## 许可证与来源
 

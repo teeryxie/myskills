@@ -125,13 +125,14 @@ def load_skill_env() -> None:
     """
     _load_platform_env()
     _load_scoped_env_files()
-    # Provider-specific convenience aliases. If the user explicitly provides
-    # JULING_GPT_IMAGE2_* for this skill, prefer that image channel.
+    # Provider-specific convenience aliases. They are only fallbacks: an
+    # explicit OPENAI_* value from the current process or a scoped .env file
+    # must never be replaced implicitly.
     juling_base = os.environ.get("JULING_GPT_IMAGE2_BASE_URL")
     juling_key = os.environ.get("JULING_GPT_IMAGE2_API_KEY")
-    if juling_base:
+    if juling_base and not os.environ.get("OPENAI_BASE_URL"):
         os.environ["OPENAI_BASE_URL"] = juling_base
-    if juling_key:
+    if juling_key and not os.environ.get("OPENAI_API_KEY"):
         os.environ["OPENAI_API_KEY"] = juling_key
 
 # =============================================================================

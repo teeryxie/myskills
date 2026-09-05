@@ -21,6 +21,7 @@ import re
 import shutil
 import subprocess
 import sys
+import tempfile
 from pathlib import Path
 from typing import Optional
 
@@ -28,6 +29,7 @@ from typing import Optional
 DEFAULT_RENDERS_DIR_NAME = "template_renders"
 RENDER_MANIFEST = "_render_manifest.json"
 _LIBREOFFICE_PROBE_ERRORS: list[str] = []
+DEFAULT_RENDER_TIMEOUT = 60
 
 
 def _safe_stem(name: str) -> str:
@@ -217,42 +219,53 @@ def _runtime_label() -> str:
 
 
 def check_render_backend() -> tuple[bool, list[str]]:
-    """Return whether any local PPTX renderer is currently usable."""
+    """Return whether a renderer can complete a minimal real PPTX conversion."""
     messages: list[str] = [f"Runtime: {_runtime_label()}"]
 
-    if sys.platform == "win32":
-        app = None
-        try:
-            from win32com import client as _win32  # type: ignore
-            app = _win32.Dispatch("PowerPoint.Application")
-            messages.append("PowerPoint COM: OK")
-            return True, messages
-        except Exception as e:
-            messages.append(f"PowerPoint COM: unavailable ({e})")
-        finally:
-            if app is not None:
-                try:
-                    app.Quit()
-                except Exception:
-                    pass
+    # A version probe is insufficient: broken user profiles and hung desktop
+    # applications are common. Exercise the actual conversion path with one
+    # tiny slide and a short timeout before advertising the backend.
+    try:
+        from pptx import Presentation  # type: ignore
+    except ImportError:
+        messages.append("python-pptx: unavailable (cannot run renderer smoke test)")
+        return False, messages
 
-    if sys.platform == "darwin":
-        keynote_app = "/Applications/Keynote.app"
-        if os.path.isdir(keynote_app):
-            ok, detail = _probe_executable("/usr/bin/osascript", ["-e", 'tell application "Keynote" to version'])
-            if ok:
-                messages.append(f"Keynote: OK ({detail})")
+    with tempfile.TemporaryDirectory(prefix="ppt-render-check-") as temp_dir:
+        temp_root = Path(temp_dir)
+        probe_pptx = temp_root / "probe.pptx"
+        probe_out = temp_root / "rendered"
+        probe_out.mkdir()
+        presentation = Presentation()
+        presentation.slides.add_slide(presentation.slide_layouts[6])
+        presentation.save(probe_pptx)
+
+        if sys.platform == "win32":
+            count = _try_powerpoint_render(probe_pptx, probe_out)
+            if count:
+                messages.append("PowerPoint COM: OK (real conversion)")
                 return True, messages
-            messages.append(f"Keynote: found but AppleScript probe failed ({detail})")
+            messages.append("PowerPoint COM: unavailable or conversion failed")
+
+        if sys.platform == "darwin" and os.path.isdir("/Applications/Keynote.app"):
+            count = _try_keynote_render(probe_pptx, probe_out, timeout=15)
+            if count:
+                messages.append("Keynote: OK (real conversion)")
+                return True, messages
+            messages.append("Keynote: unavailable or conversion failed")
+
+        cli = _find_libreoffice()
+        if cli:
+            try:
+                _convert_pptx_to_pdf(probe_pptx, probe_out / "probe.pdf")
+                messages.append(f"LibreOffice: OK (real conversion, {cli})")
+                return True, messages
+            except RuntimeError as exc:
+                messages.append(f"LibreOffice: conversion failed ({exc})")
         else:
-            messages.append("Keynote: not found")
+            messages.append("LibreOffice: unavailable")
 
-    cli = _find_libreoffice()
-    if cli:
-        messages.append(f"LibreOffice: OK ({cli})")
-        return True, messages
-
-    messages.append("LibreOffice: unavailable")
+    messages.append("No usable PPTX renderer completed the smoke test")
     if _LIBREOFFICE_PROBE_ERRORS:
         messages.extend(f"  - {err}" for err in _LIBREOFFICE_PROBE_ERRORS)
     messages.append(
@@ -333,7 +346,9 @@ def _try_powerpoint_render(pptx_path: Path, out_dir: Path) -> Optional[int]:
             pass
 
 
-def _try_keynote_render(pptx_path: Path, out_dir: Path) -> Optional[int]:
+def _try_keynote_render(
+    pptx_path: Path, out_dir: Path, timeout: int = 120
+) -> Optional[int]:
     """macOS only: use Keynote AppleScript to export slides as PNGs.
 
     Returns page count, or None if unavailable / failed (caller should fall back to LO).
@@ -380,7 +395,7 @@ def _try_keynote_render(pptx_path: Path, out_dir: Path) -> Optional[int]:
     try:
         result = subprocess.run(
             ["osascript", "-e", script],
-            check=True, capture_output=True, text=True, timeout=120,
+            check=True, capture_output=True, text=True, timeout=timeout,
         )
         stdout = result.stdout.strip()
         if stdout.startswith("ERR:"):
@@ -477,14 +492,33 @@ def _cleanup_keynote_export(dest_prefix: Path) -> None:
 def _convert_pptx_to_pdf(pptx_path: Path, out_pdf: Path) -> None:
     cli = _find_libreoffice()
     if cli:
+        out_pdf.parent.mkdir(parents=True, exist_ok=True)
+        profile_dir = Path(tempfile.mkdtemp(prefix="ppt-render-lo-profile-"))
+        try:
+            timeout = int(os.environ.get("PPT_RENDER_TIMEOUT", DEFAULT_RENDER_TIMEOUT))
+        except ValueError:
+            timeout = DEFAULT_RENDER_TIMEOUT
         try:
             subprocess.run(
-                [cli, "--headless", "--convert-to", "pdf",
-                 "--outdir", str(out_pdf.parent), str(pptx_path)],
-                check=True, capture_output=True, text=True,
+                [
+                    cli,
+                    "--headless",
+                    f"-env:UserInstallation={profile_dir.as_uri()}",
+                    "--convert-to",
+                    "pdf",
+                    "--outdir",
+                    str(out_pdf.parent),
+                    str(pptx_path),
+                ],
+                check=True,
+                capture_output=True,
+                text=True,
+                timeout=timeout,
             )
-        except (PermissionError, OSError, subprocess.CalledProcessError) as e:
+        except (PermissionError, OSError, subprocess.CalledProcessError, subprocess.TimeoutExpired) as e:
             raise RuntimeError(_render_backend_error(f"LibreOffice 转 PDF 失败：{e}")) from e
+        finally:
+            shutil.rmtree(profile_dir, ignore_errors=True)
         produced = out_pdf.parent / f"{pptx_path.stem}.pdf"
         if not produced.exists():
             raise RuntimeError(f"LibreOffice 未产出 PDF：{produced}")

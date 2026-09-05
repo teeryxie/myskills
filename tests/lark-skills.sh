@@ -45,7 +45,7 @@ if command -v lark-cli >/dev/null 2>&1; then
 fi
 
 skill_count=$(find "$repo_root/skills" -type f -name SKILL.md | wc -l | tr -d ' ')
-test "$skill_count" = 36
+test "$skill_count" = 56
 
 printf 'lark-skills: validated %d custom skills; repository has %s skills\n' \
   "${#skills[@]}" "$skill_count"

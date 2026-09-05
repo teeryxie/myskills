@@ -209,7 +209,9 @@ GPT_IMAGE_QUALITY=high                     # low / medium / high / auto
 # VISION_MODEL_NAME=gemini-3.1-pro-preview   # 或 gpt-4o / claude-3.5-sonnet 等任意多模态 SKU
 ```
 
-> **安全提示**：脚本只读取当前进程环境、平台注入的 `gpt-image2-ppt_*` 变量、显式 `GPT_IMAGE2_PPT_ENV`，以及 skill 安装目录下的 `.env` fallback。脚本**不会**向上递归读取调用者项目目录里的 `.env`，避免误吃业务项目密钥。
+配置优先级固定为：当前进程环境变量 > 平台注入的 `gpt-image2-ppt_*` 变量 > `GPT_IMAGE2_PPT_ENV` / skill 目录下的 `.env`；`JULING_GPT_IMAGE2_*` 只作为没有对应 `OPENAI_*` 配置时的兼容 fallback，不会覆盖显式配置。
+
+> **安全提示**：脚本只读取当前进程环境、平台注入的 `gpt-image2-ppt_*` 变量、显式 `GPT_IMAGE2_PPT_ENV`，以及 skill 安装目录下的 `.env` fallback。脚本**不会**向上递归读取调用者项目目录里的 `.env`，避免误吃业务项目密钥。`python3 scripts/render_template.py --check` 会执行一个最小真实转换来验证回渲染后端。
 
 ## 如果你就是 Codex agent（原生 image_generation 出图 — 推荐）
 

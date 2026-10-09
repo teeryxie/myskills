@@ -1,0 +1,4 @@
+interface:
+  display_name: "Delegate to Spark"
+  short_description: "Delegate bounded validation work to the fast Spark model"
+  default_prompt: "Use $delegate-to-spark to run a bounded validation task with GPT-5.3-Codex-Spark."

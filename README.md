@@ -28,6 +28,13 @@
 | Integrations | `lark-progress-sync` | 跨私聊、群聊、会议和文档提炼进度，经确认后发送 | 自维护；依赖官方 `lark-*` Skills |
 | Integrations | `lark-weekly-report-submit` | 定位周次、填写个人周报、登记小组链接并回读验证 | 自维护；依赖官方 `lark-*` Skills |
 | Presentations | `gpt-image2-ppt` | 使用 gpt-image-2、风格库或用户模板生成高分辨率 PPT | [JuneYaooo/gpt-image2-ppt-skills](https://github.com/JuneYaooo/gpt-image2-ppt-skills) |
+| Presentations | `frontend-slides` | 创建动画丰富的 HTML 演示文稿，或将 PowerPoint 转为网页演示 | [zarazhangrui/frontend-slides](https://github.com/zarazhangrui/frontend-slides) |
+| Presentations | `image-to-editable-ppt` | 将图片、扫描版 PPT/PDF 重建为对象级可编辑 PowerPoint | 本机同步，源自 [ningzimu/image-to-editable-ppt-skill](https://github.com/ningzimu/image-to-editable-ppt-skill) |
+| Writing | `asd-ste100` | 按 ASD-STE100 原则消除英文技术文本歧义 | [danyuchn/asd-ste100-skill](https://github.com/danyuchn/asd-ste100-skill)，本地中文适配 |
+| Engineering | `minimal-code-discipline` | 规划和实现阶段控制改动范围，保持最小正确 diff | 本机同步 |
+| Engineering | `code-simplify` | 实现后清理高置信度冗余并保持行为不变 | [paulrberg/agent-skills](https://www.skills.sh/paulrberg/agent-skills/code-simplify)，本地兼容恢复 |
+| Engineering | `overengineering-review` | 只报告具体且可移除的过度设计 | 本机同步 |
+| Engineering | `delegate-to-spark` | 将边界清晰的编码或验证工作委派给 GPT-5.3-Codex-Spark | 本机同步 |
 | Frontend | `frontend-ui-standards` | 跨框架前端规范与组件复用 | 自维护 |
 | Frontend | `design-taste-frontend` | Landing page、作品集和改版的反模板设计 | 本机同步 |
 | Frontend | `frontend-design` | 有明确视觉方向的前端设计与实现指导 | 本机同步，含上游许可证 |
@@ -64,11 +71,11 @@
 
 ### 2026-09-05 上游同步
 
-本次按各上游默认分支的固定提交核验，完整版本记录见 [`UPSTREAMS.json`](UPSTREAMS.json)。仓库共包含 **71 个 skills**，并非所有外部 CLI 或运行依赖均已安装。
+本次按各上游默认分支的固定提交核验，完整版本记录见 [`UPSTREAMS.json`](UPSTREAMS.json)。仓库共包含 **78 个 skills**，并非所有外部 CLI 或运行依赖均已安装。
 
 ### 2026-10-09 本机同步
 
-本次同步将本机新增的 15 个 skill 加入仓库，并把本机已有的优化覆盖合并到对应 skill，同时保留仓库原有的新增文件和目录。`ccfa_figure_data` 与 `overview` 按 frontmatter 名称分别合并到 `ccfa-paper-figures` 和 `scientific-figure-generator`，避免产生重复 skill 名称。
+本次同步将本机新增的 22 个 skill 加入仓库，并把本机已有的优化覆盖合并到对应 skill，同时保留仓库原有的新增文件和目录。`ccfa_figure_data` 与 `overview` 按 frontmatter 名称分别合并到 `ccfa-paper-figures` 和 `scientific-figure-generator`，避免产生重复 skill 名称。
 
 - `ui-craft` 更新至上述记录中的提交，并补齐新版入口引用的 20 个子技能，完整套件共 29 个。
 - `ui-ux-pro-max` 同步搜索脚本、数据来源记录、字体许可证资料与最新规则；调用路径改为当前 skill 目录，不依赖 Claude 专用变量。

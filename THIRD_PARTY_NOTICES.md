@@ -115,5 +115,23 @@ The following skills are maintained in this collection and do not currently decl
 - `rebuttal-critic`
 - `rebuttal-writer`
 - `remote-codex-update`
+- `code-simplify`（基于上游公开 skill，保留本机兼容恢复说明）
+- `delegate-to-spark`
+- `minimal-code-discipline`
+- `overengineering-review`
+
+## asd-ste100
+
+Source: [danyuchn/asd-ste100-skill](https://github.com/danyuchn/asd-ste100-skill), upstream version `0.4.0`.
+
+The skill directory retains its MIT `LICENSE`. The Chinese entry guidance is a local adaptation; the English references and lint script remain upstream-derived.
+
+## frontend-slides
+
+Source: [zarazhangrui/frontend-slides](https://github.com/zarazhangrui/frontend-slides). The skill directory retains its upstream `LICENSE`; the README and bundled template pack are included because the skill references them at runtime.
+
+## image-to-editable-ppt
+
+Source: [ningzimu/image-to-editable-ppt-skill](https://github.com/ningzimu/image-to-editable-ppt-skill). The directory is a local runtime-compatible copy. It contains no credentials; API tokens remain runtime configuration only.
 
 Unless a skill directory says otherwise, no additional license grant is implied.

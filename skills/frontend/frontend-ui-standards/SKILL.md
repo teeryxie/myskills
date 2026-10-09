@@ -189,3 +189,4 @@ Exceptions are acceptable when they are deliberate and contained:
 - Platform-specific constraints that require local adaptation.
 
 Even then, keep the value in a named metrics object and keep the exception small.
+

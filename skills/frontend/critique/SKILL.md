@@ -5,27 +5,15 @@ description: "Design lens critique covering visual hierarchy, clarity, and anti-
 
 <!-- HARNESS MIRROR — do not edit here. Canonical source: skills/ or commands/. After editing source, copy into cli/assets/<harness>/ and repo-root harness mirrors. -->
 
-**Context:** this sub-skill is one lens of the broader `ui-craft` skill. If the `ui-craft` skill is also installed, read its SKILL.md first for Discovery + Anti-Slop + Craft Test, then apply the specific lens below.
+**Context:** Use the relevant ui-craft guidance if needed and not already loaded. Reviews do not run build Discovery or require brand preference approval.
 
 Critique the UI at `$ARGUMENTS` through a design lens. Load the `ui-craft` skill.
 
-## Step 0: Visual capture (mandatory)
+## Step 0: Evidence appropriate to the review
 
-Code-only review is insufficient. Every audit/critique starts with the surface as the user sees it. Try the following in order; use the first one available:
+Use available browser automation or supplied screenshots for visual findings. Select viewports and themes relevant to the request; a full responsive audit may need desktop, tablet and mobile, while a local issue may need only its affected viewport.
 
-1. **Playwright MCP** — if `playwright` MCP server is available, use it. Capture full-page screenshots at three viewports: desktop (1280×800), tablet (768×1024), mobile (375×812). Capture dark mode if the app supports it.
-2. **Browser DevTools / Chrome MCP** — second choice; same viewport set.
-3. **Other browser automation** (`agent-browser`, `cursor-ide-browser`) — third choice.
-4. **Ask the user** — last resort. If no automation is available, request screenshots from the user before proceeding. Be specific:
-   - "Visual review needs screenshots. Please provide:
-     - Full-page at 1280px (desktop)
-     - Full-page at 768px (tablet)
-     - Full-page at 375px (mobile)
-     - Dark mode of each, if supported."
-
-Do not begin the review until visuals are captured or provided. State this explicitly to the user when no automation succeeds — don't silently fall back to code-only review.
-
-If the user declines to provide screenshots, run a code-only pass and clearly mark the report `[CODE-ONLY REVIEW — visual issues not assessed]` at the top so the limitation is explicit.
+If rendering is unavailable, proceed with independent static checks and label visual findings unverified. Request screenshots only when missing visual evidence prevents the core conclusion; do not block unrelated code, accessibility or performance checks. Never claim visual validation from code alone.
 
 **Knob awareness (CRAFT_LEVEL sets the bar for what counts as "needs work"):**
 - `CRAFT_LEVEL 3` → flag only anti-slop **Critical** items. Skip Minor polish.
@@ -48,8 +36,8 @@ If the user declines to provide screenshots, run a code-only pass and clearly ma
 
 Prioritize by impact, not by file order. End with a one-paragraph summary of the **top 3 changes** that would raise this from "AI-generated" to "designed".
 
-Do NOT edit code. This is a critique.
+A critique-only request does not authorize edits. If the user also explicitly requests fixes, apply and verify the in-scope repairs without a second confirmation.
 
-**Close with a Craft Report** (`../ui-craft/references/review.md` → Craft Report) as the final wrapper around the findings table and top-3 summary — Checked names the lenses actually run (Anti-Slop, Craft Test, Hierarchy, Clarity, Signature, Inspiration gap) and at what CRAFT_LEVEL bar, Passed carries whatever held up under those lenses, Changed stays empty (critique doesn't edit), Left alone covers anything flagged but out of scope, Verdict is the one-sentence state. Produce it even when the surface passes clean — that's the validation the user is asking for.
+**Close with a Craft Report** (`../ui-craft/references/review.md` → Craft Report) as the final wrapper around the findings table and top-3 summary — Checked names the lenses actually run (Anti-Slop, Craft Test, Hierarchy, Clarity, Signature, Inspiration gap) and at what CRAFT_LEVEL bar, Passed carries whatever held up under those lenses, Changed lists authorized repairs or stays empty for critique-only requests, Left alone covers anything flagged but out of scope, Verdict is the one-sentence state. Produce it even when the surface passes clean — that's the validation the user is asking for.
 
 **Next step:** `/polish` — apply the fixes this critique named (rung 1).

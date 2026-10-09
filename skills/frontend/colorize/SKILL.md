@@ -11,7 +11,7 @@ Add color to the UI at `$ARGUMENTS`. Load the `ui-craft` skill.
 
 **The rule (from SKILL.md):** 90%+ neutral, one accent, 3-5 placements per viewport. Reinforce this before adding anything. More color is not more design.
 
-**Before you touch anything — ask about brand.** If a brand color exists, use it. If not, offer 2-3 options in OKLCH — include one warm (e.g., `oklch(0.67 0.19 45)`) and one cool (e.g., `oklch(0.60 0.18 250)`). Never default to blue.
+**Brand context:** Reuse the existing project brand or the user's specified colors. Ask only if brand information is missing or conflicting and materially affects the requested result, or the user requests a new direction. Otherwise make the scoped change without repeating Discovery.
 
 **Where color EARNS its place:**
 

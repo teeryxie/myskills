@@ -1,0 +1,4 @@
+interface:
+  display_name: "Qwen3.8 本地 MLX"
+  short_description: "管理并使用本机 Qwen3.8-27B MLX CUDA 服务"
+  default_prompt: "使用 $qwen38-local-mlx 检查并启动本机模型，然后告诉我如何调用。"

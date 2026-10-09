@@ -1,37 +1,29 @@
-# Installation Layout Templates
+# Known Host Layouts
 
-Use these templates only after live discovery. Replace placeholders with the requested target's verified values. Do not encode personal hosts, usernames, internal addresses, or workstation-specific mounts in a public skill.
+Read only the section for the requested target, and revalidate every path before mutation.
 
-## Persistent Bootstrap Layout
+## Telos dstack H20
 
-Typical components:
+- SSH alias: `telos_h20_8`
+- Persistent root: `/mnt/cluster/.tools/xietianyu`
+- Bootstrap manifest: `/mnt/cluster/.tools/xietianyu/bootstrap/manifest.env`
+- Offline archive: `offline-cache/codex/<version>/linux-x64/openai-codex-<version>-linux-x64.tgz`
+- Release: `codex/<version>` with the npm package's leading `package/` component stripped
+- Stable link: `bin/codex`
+- Container entry: `/usr/local/bin/codex` points to the stable link and normally does not need replacement
+- Staging: `staging/codex-v<version>`
+- Transfer: use `scp` through `telos_h20_8`; the Windows `W:` drive belongs to SICAU, not Telos
 
-- SSH alias: `<remote-alias>`
-- Persistent root: `<persistent-root>`
-- Bootstrap manifest: `<persistent-root>/bootstrap/manifest.env`
-- Offline archive: `<persistent-root>/offline-cache/codex/<version>/<platform>/openai-codex-<version>-<platform>.tgz`
-- Versioned release: `<persistent-root>/codex/<version>`
-- Stable link: `<persistent-root>/bin/codex`
-- Optional system/container entry: a stable link that points to `<persistent-root>/bin/codex`
-- Staging: `<persistent-root>/staging/codex-v<version>`
+For a durable update, back up and replace exactly the manifest's `CODEX_VERSION`, `CODEX_ARCHIVE`, and `CODEX_SHA256` values after the new cache and release validate. Preserve the old release and a version-labelled rollback link.
 
-For a durable update, identify every manifest field that controls version, archive name, platform triplet, and integrity hash. Back up the manifest, validate the new cache and release, then update only the discovered Codex fields. Preserve the old release and a version-labelled rollback link.
+## SICAU HPC
 
-## Versioned User Layout
+- SSH alias: `sicau_hpc`
+- User home: `/public/home/xty`
+- Release: `~/.local/opt/codex-<version>-linux-x64/package`
+- Stable link: `~/.local/bin/codex`
+- Mounted transfer path: local `W:/tmp` maps to remote `/public/home/xty/workdir/tmp`
 
-Typical components:
+Preserve the npm archive's leading `package/` directory for this layout. Validate the extracted binary at `package/vendor/x86_64-unknown-linux-musl/bin/codex`, retain the old release, and keep a rollback link such as `~/.local/bin/codex.prev` before an atomic switch.
 
-- SSH alias: `<remote-alias>`
-- User home: `<remote-home>`
-- Release: `<remote-home>/.local/opt/codex-<version>-<platform>`
-- Stable link: `<remote-home>/.local/bin/codex`
-- Staging: a verified writable workspace such as `<remote-workspace>/tmp`
-
-Confirm whether extraction should preserve the npm archive's leading `package/` directory. Validate the exact extracted binary path before switching the stable link. Keep a version-labelled rollback link and the old release.
-
-## Transfer Route Rules
-
-- Use `scp` or SFTP when the target's SSH route is healthy.
-- Use a local mounted workspace only after proving its local and remote paths map to the same requested host.
-- A successful mounted-file copy does not prove SSH health.
-- If SSH routing fails, leave the staged package intact and pause activation. Do not repair VPN, proxy, container, or routing state without separate authorization.
+SICAU SSH depends on the local Docker UniVPN/SOCKS5 route. A successful `W:` copy does not prove SSH health. If SSH returns an Ncat reachability error, leave the staged package intact and pause remote activation; do not modify Clash, Docker, or network state unless that repair is separately authorized.

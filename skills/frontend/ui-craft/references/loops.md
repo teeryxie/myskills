@@ -1,6 +1,6 @@
 # Loop Engine
 
-Run→evaluate→fix one→re-evaluate→stop. A loop is not a review pass — it iterates until a binary gate passes or the budget runs out. A loop NEVER hard-depends on a renderer, NEVER auto-installs anything, and ALWAYS degrades with an explicit notice when visual evaluation is unavailable. The budget is non-negotiable: when it is exhausted the engine stops and reports, even if the gate has not passed.
+Run→evaluate→fix one coherent batch→re-evaluate→stop. A loop is not a review pass — it iterates until a binary gate passes or the budget runs out. A loop NEVER hard-depends on a renderer, NEVER auto-installs anything, and ALWAYS degrades with an explicit notice when visual evaluation is unavailable. The budget is non-negotiable: when it is exhausted the engine stops and reports, even if the gate has not passed.
 
 ---
 
@@ -22,15 +22,15 @@ Every preset declares all five fields. None is optional.
 
 The agent executes this numbered procedure for every iteration:
 
-1. **Read** the target AND `.ui-craft/brief.md` §6 (learned constraints = override registry). Brief §6 overrides preset gates; the a11y/correctness floor is never overridden.
-2. **Detect renderer** (see Renderer Detection Ladder below) and emit the pre-flight cost notice — preset name, budget, "will run up to N iterations; each iteration runs one full evaluate → fix → re-evaluate cycle." MUST emit before any iteration begins.
+1. **Read** the requested target and relevant existing constraints. Use `.ui-craft/brief.md` §6 if present; otherwise use the user request and established product behavior. A missing brief does not block evaluation. The a11y/correctness floor is never overridden.
+2. **Detect renderer** once per run (reuse a working renderer) and state the preset and iteration budget before the first iteration. Do not repeat unchanged pre-flight checks or cost notices.
 3. **Evaluate** the target through the preset's lens → produce a severity-ranked findings list.
-4. **Select ONE highest-impact fix.** Ranking: Critical before Major; tiebreaker within the same tier = earlier-numbered finish-bar pass / earlier-listed state in the state-design lattice / earlier-cited finding in the brief; for token-consistency: within the same tier, apply layer order — primitive token violations before semantic, semantic before component. MUST NOT apply more than one fix per iteration.
+4. **Select one coherent repair batch.** Prioritize Critical before Major and group changes sharing a root cause that can be verified together. Do not combine unrelated redesign or cleanup.
 5. **Apply** the selected fix.
 6. **Re-evaluate** — run the gate check on the updated state.
 7. **Stop** when the gate passes OR the iteration count reaches the budget, whichever comes first. On budget exhaustion: STOP, print final gate state, and list all open findings as "Unresolved within budget:". MUST NOT silently extend the budget.
 
-**Anti-thrash rule:** a fix that introduces a new violation is caught in the NEXT iteration — no inline re-validation. It counts against the budget.
+**Anti-thrash rule:** Re-evaluate the affected criteria after each batch. If a repair introduces a regression, treat it as an unresolved finding within the same overall budget; do not start an unbounded nested loop.
 
 ---
 
@@ -71,7 +71,7 @@ Every loop report MUST state:
 
 ## Anti-thrash + Budget Rules
 
-- **One fix per iteration.** The ranking above is mandatory — it prevents oscillation.
+- **One coherent repair batch per iteration.** Group a shared root cause, preserve severity order and avoid unrelated changes.
 - The iteration counter is tracked in the report ("iteration 2 of 3").
 - Budget exhausted → STOP, print final gate state + "Unresolved within budget:" list. The user must explicitly raise the budget; the engine MUST NOT auto-extend.
 - Brief §6 constraints override preset gates. The a11y/correctness floor is never overridden by brief constraints.
@@ -121,7 +121,7 @@ Every loop report MUST state:
 ## token-consistency — iterate until zero off-system values remain
 
 **Lens:** `tokens.md` 3-layer contract (per tokens.md 3-layer contract — see that file for canonical layer definitions) + SKILL.md Anti-Slop Minor items for hardcoded values.
-**Gate:** zero off-system values — any color, radius, or spacing value not drawn from the project's token system.
+**Gate:** no unresolved violations of the applicable token conventions within the requested scope. Unused categories, unrequested themes and documented intentional values are not violations; do not expand into unrelated surfaces.
 **Renderer:** none — static code scan; always available.
 **Highest-impact ranking:** Critical token violations (raw hex colors) before Major (arbitrary radii, magic spacing); tiebreaker = order of appearance in the file.
 **Example run:**

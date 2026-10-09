@@ -7,7 +7,7 @@ description: "Pre-ship gate — runs detector, verifies brief and tokens, applie
 
 **Context:** this sub-skill is one lens of the broader `ui-craft` skill. If the `ui-craft` skill is also installed, read its SKILL.md first for Discovery + Anti-Slop + Craft Test, then apply the specific lens below.
 
-Load the `ui-craft` skill. This command produces findings only — do NOT edit code.
+Use relevant `ui-craft` guidance. Review-only requests produce findings. When the user also asks to fix issues, apply and verify in-scope repairs; no special convergence phrase is required for ordinary authorized fixes.
 
 ---
 
@@ -15,7 +15,7 @@ Load the `ui-craft` skill. This command produces findings only — do NOT edit c
 
 Look for `.ui-craft/brief.md`.
 
-- Absent: STOP. Output: "No brief found. Run `/brief` first. `/finalize` requires a design brief to distinguish intentional decisions from findings." Do not proceed.
+- Absent: infer applicable acceptance criteria from the user request and existing product; state material assumptions. Ask only if missing criteria prevent a core judgment. Do not require creation of a brief merely to review existing work.
 - Present: load it. Extract principles (numbered, in conflict-resolution order). These are the override registry for Steps 4–5.
 
 ---
@@ -30,13 +30,7 @@ Capture all output. Every Critical detector finding maps directly to a block-shi
 
 ## Step 3 — Token check
 
-Quick three-question audit (no deep read required):
-
-1. Are all three token layers present (primitives → semantic → component)?
-2. Are both light and dark modes explicitly authored (not inverted)?
-3. Are all seven token categories represented (color, spacing, radius, shadow, typography, motion, z-index)?
-
-Any "no": flag as Major. Do not block ship. Append a recommendation: "Run `/tokens` to close the gap at [category]."
+Check only token layers and categories needed by the target, and themes already supported or requested. Missing unused categories, optional component tokens or unrequested dark mode are N/A. Flag concrete consistency or usability problems; do not gate delivery on building a new design system.
 
 ---
 
@@ -68,7 +62,7 @@ Load `../ui-craft/references/recipe-landing.md` and run its Acceptance-bar mecha
 
 ## Step 4 — Finish bar
 
-Load `../ui-craft/references/finish-bar.md`. Run all 10 passes in document order. Do not reorder.
+Load `../ui-craft/references/finish-bar.md` when needed. Select applicable passes using scope and the rules below; mark irrelevant checks N/A. Recheck affected passes after repairs, not every unchanged dimension.
 
 **Knob behavior (apply before running):**
 
@@ -135,14 +129,14 @@ If a tier has no findings, omit the section header entirely.
 
 ## Step 6b — Convergence mode (explicit opt-in only)
 
-Convergence mode activates ONLY when the user explicitly says "run in convergence mode", "converge until the bar passes", or uses a `--converge` flag. A vague "keep going", "fix it", or "make it pass" does NOT trigger convergence — the default remains findings-only (Step 7 hard-stop applies).
+Repeated whole-surface convergence requires an explicit request to iterate until the quality bar passes (including a convergence flag). Ordinary requests such as "check and fix" already authorize in-scope repairs and relevant verification, but do not imply open-ended convergence.
 
-When explicitly triggered: load `skills/ui-craft/references/loops.md` and run preset `visual-anti-slop` (budget the default loop budget defined in loops.md, hard cap 5). Emit the pre-flight cost notice before iteration 1. After each single highest-impact fix, re-run finalize Steps 2–6 (this command's own steps) until READY or budget exhausted. **Note:** finalize's findings-only hard-stop (Step 7) is lifted ONLY inside convergence mode — fixes are applied during iteration.
+When convergence is requested, load `../ui-craft/references/loops.md` and use preset `visual-anti-slop` (default budget 3, hard cap 5). State the budget once. Apply a coherent batch of fixes sharing a root cause and recheck affected criteria. Stop on success or budget exhaustion, reporting unresolved findings honestly.
 
 ---
 
 ## Step 7 — Hard stops
 
-Do not edit any file. Do not propose code changes inline. The verdict is the output. If the user asks for fixes after reading the report, respond to that as a separate request.
+Do not edit for review-only requests. An existing request to fix authorizes in-scope repairs without a second request. Neither review nor repair authorizes unrelated redesign, deployment, merging, or other external changes. Stop when the requested outcome and relevant verification pass.
 
 **Next step:** Ship. If the gate is red, the findings name the pass to re-run — `/polish`, `/harden` or `/clarify`.

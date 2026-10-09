@@ -19,13 +19,28 @@
 | Documents | `docx-polish-pipeline` | Markdown/草稿到 DOCX/PDF 的精修管线 | 自维护 |
 | Browser | `ego-browser` | ego-lite 浏览器自动化 | [citrolabs/ego-lite](https://github.com/citrolabs/ego-lite) |
 | Browser | `playwright` | Playwright 浏览器测试与抓取 | Microsoft/OpenAI 分发版本 |
+| Browser | `browseros-neo` | BrowserOS neo 浏览器自动化与已登录会话操作 | 本机同步 |
 | Operations | `remote-codex-update` | 无外网 Linux 远端的 Codex 离线更新 | 自维护，公开版已脱敏 |
+| Operations | `dstack-multinode-submit` | dstack 多机多卡训推提交与启动验证 | 本机同步 |
+| Operations | `qwen38-local-mlx` | Windows/WSL2 本地 Qwen3.8 MLX 服务管理 | 本机同步 |
 | Integrations | `collaborating-with-gemini-cli` | 通过 JSON bridge 调用 Gemini CLI 进行复核、调试和方案比较 | [ZhenHuangLab/collaborating-with-gemini-cli](https://github.com/ZhenHuangLab/collaborating-with-gemini-cli) |
 | Integrations | `lark-ops-control` | 所有飞书任务的 CLI 优先路由，以及身份、OAuth、外部群和资源权限诊断 | 自维护；依赖 [larksuite/cli](https://github.com/larksuite/cli) |
 | Integrations | `lark-progress-sync` | 跨私聊、群聊、会议和文档提炼进度，经确认后发送 | 自维护；依赖官方 `lark-*` Skills |
 | Integrations | `lark-weekly-report-submit` | 定位周次、填写个人周报、登记小组链接并回读验证 | 自维护；依赖官方 `lark-*` Skills |
 | Presentations | `gpt-image2-ppt` | 使用 gpt-image-2、风格库或用户模板生成高分辨率 PPT | [JuneYaooo/gpt-image2-ppt-skills](https://github.com/JuneYaooo/gpt-image2-ppt-skills) |
 | Frontend | `frontend-ui-standards` | 跨框架前端规范与组件复用 | 自维护 |
+| Frontend | `design-taste-frontend` | Landing page、作品集和改版的反模板设计 | 本机同步 |
+| Frontend | `frontend-design` | 有明确视觉方向的前端设计与实现指导 | 本机同步，含上游许可证 |
+| Frontend | `gsap-core` | GSAP 核心补间、缓动和响应式动画 | 本机同步，MIT |
+| Frontend | `gsap-frameworks` | Vue/Svelte 等框架中的 GSAP 生命周期与清理 | 本机同步，MIT |
+| Frontend | `gsap-performance` | GSAP 动画性能、合成层和布局开销优化 | 本机同步，MIT |
+| Frontend | `gsap-plugins` | GSAP 插件注册、滚动、拖拽、SVG 和文字动画 | 本机同步，MIT |
+| Frontend | `gsap-react` | React/Next.js 中的 GSAP useGSAP 与清理 | 本机同步，MIT |
+| Frontend | `gsap-scrolltrigger` | GSAP ScrollTrigger 滚动驱动动画 | 本机同步，MIT |
+| Frontend | `gsap-timeline` | GSAP 时间线与动画编排 | 本机同步，MIT |
+| Frontend | `gsap-utils` | gsap.utils 数值、集合和映射工具 | 本机同步，MIT |
+| Frontend | `hallmark` | 反 AI 模板的页面结构和视觉设计 | 本机同步 |
+| Frontend | `impeccable` | 前端界面设计、审计、优化和收尾工作流 | 本机同步，Apache 2.0 |
 | Frontend | `create-adaptable-composable` | 创建支持值、ref 和 getter 的 Vue composable | [vuejs-ai/skills](https://github.com/vuejs-ai/skills) |
 | Frontend | `vue-best-practices` | Vue 3、Composition API、TypeScript 和 SSR 主规范 | [vuejs-ai/skills](https://github.com/vuejs-ai/skills) |
 | Frontend | `vue-debug-guides` | Vue 3 运行时、响应式、异步和 hydration 排错 | [vuejs-ai/skills](https://github.com/vuejs-ai/skills) |
@@ -49,7 +64,11 @@
 
 ### 2026-09-05 上游同步
 
-本次按各上游默认分支的固定提交核验，完整版本记录见 [`UPSTREAMS.json`](UPSTREAMS.json)。仓库共包含 **56 个 skills**，并非所有外部 CLI 或运行依赖均已安装。
+本次按各上游默认分支的固定提交核验，完整版本记录见 [`UPSTREAMS.json`](UPSTREAMS.json)。仓库共包含 **71 个 skills**，并非所有外部 CLI 或运行依赖均已安装。
+
+### 2026-10-09 本机同步
+
+本次同步将本机新增的 15 个 skill 加入仓库，并把本机已有的优化覆盖合并到对应 skill，同时保留仓库原有的新增文件和目录。`ccfa_figure_data` 与 `overview` 按 frontmatter 名称分别合并到 `ccfa-paper-figures` 和 `scientific-figure-generator`，避免产生重复 skill 名称。
 
 - `ui-craft` 更新至上述记录中的提交，并补齐新版入口引用的 20 个子技能，完整套件共 29 个。
 - `ui-ux-pro-max` 同步搜索脚本、数据来源记录、字体许可证资料与最新规则；调用路径改为当前 skill 目录，不依赖 Claude 专用变量。
@@ -195,7 +214,7 @@ Codex 通常会自动发现新安装的 skill；若未出现，重启 Codex。�
 
 发布前执行以下检查：
 
-- 56 个 `SKILL.md` 均存在且能被递归发现；
+- 71 个 `SKILL.md` 均存在且能被递归发现；
 - 公开内容不包含私钥、Token、密码或真实 API Key；
 - `remote-codex-update` 的公开版本不包含个人主机名、用户名、内网地址或个人目录；
 - 安装脚本在隔离目标目录中测试，不覆盖现有用户 skills；

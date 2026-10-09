@@ -1,0 +1,6 @@
+interface:
+  display_name: "dstack 多机多卡训推提交"
+  short_description: "复用常驻 GPU 队列，完成代码上传、角色环境核实、提交回执与启动排障"
+  default_prompt: "使用 $dstack-multinode-submit 核实当前集群与队列，将本项目训推作业提交到已有资源并验证实际执行阶段。"
+policy:
+  allow_implicit_invocation: true

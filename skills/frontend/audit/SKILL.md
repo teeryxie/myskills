@@ -5,31 +5,19 @@ description: "Technical UI audit — a11y, performance, responsive. Produces a p
 
 <!-- HARNESS MIRROR — do not edit here. Canonical source: skills/ or commands/. After editing source, copy into cli/assets/<harness>/ and repo-root harness mirrors. -->
 
-**Context:** this sub-skill is one lens of the broader `ui-craft` skill. If the `ui-craft` skill is also installed, read its SKILL.md first for Discovery + Anti-Slop + Craft Test, then apply the specific lens below.
+**Context:** Use the relevant ui-craft guidance if needed and not already loaded. Reviews do not run build Discovery or require brand preference approval.
 
 Run a technical audit of the UI at `$ARGUMENTS`. Load the `ui-craft` skill and apply the audit lens.
 
-## Step 0: Visual capture (mandatory)
+## Step 0: Evidence appropriate to the review
 
-Code-only review is insufficient. Every audit/critique starts with the surface as the user sees it. Try the following in order; use the first one available:
+Use available browser automation or supplied screenshots for visual findings. Select viewports and themes relevant to the request; a full responsive audit may need desktop, tablet and mobile, while a local issue may need only its affected viewport.
 
-1. **Playwright MCP** — if `playwright` MCP server is available, use it. Capture full-page screenshots at three viewports: desktop (1280×800), tablet (768×1024), mobile (375×812). Capture dark mode if the app supports it.
-2. **Browser DevTools / Chrome MCP** — second choice; same viewport set.
-3. **Other browser automation** (`agent-browser`, `cursor-ide-browser`) — third choice.
-4. **Ask the user** — last resort. If no automation is available, request screenshots from the user before proceeding. Be specific:
-   - "Visual review needs screenshots. Please provide:
-     - Full-page at 1280px (desktop)
-     - Full-page at 768px (tablet)
-     - Full-page at 375px (mobile)
-     - Dark mode of each, if supported."
-
-Do not begin the review until visuals are captured or provided. State this explicitly to the user when no automation succeeds — don't silently fall back to code-only review.
-
-If the user declines to provide screenshots, run a code-only pass and clearly mark the report `[CODE-ONLY REVIEW — visual issues not assessed]` at the top so the limitation is explicit.
+If rendering is unavailable, proceed with independent static checks and label visual findings unverified. Request screenshots only when missing visual evidence prevents the core conclusion; do not block unrelated code, accessibility or performance checks. Never claim visual validation from code alone.
 
 **Note:** audit is knob-agnostic — accessibility and performance are not tunable.
 
-**Scope (non-negotiable checks):**
+**Scope:** Apply the following checks to the requested target and review dimensions. Do not expand a focused review to unrelated surfaces.
 
 1. **Accessibility** — read `../ui-craft/references/accessibility.md`:
    - Visible `:focus-visible` on every interactive element
@@ -57,8 +45,8 @@ If the user declines to provide screenshots, run a code-only pass and clearly ma
 
 Group findings by priority: **Critical** (blocks usability/a11y) → **High-impact** (immediately noticeable) → **Quick wins** (polish).
 
-Do NOT rewrite code unless asked. Report findings first; wait for approval before editing.
+Review-only requests produce findings without edits. If the user already asked to review and fix, repair in-scope findings and verify the changes without requiring another approval.
 
-**Close with a Craft Report** (`../ui-craft/references/review.md` → Craft Report), wrapping the findings table above — Checked states scope (a11y/perf/responsive, at which viewports), Passed carries anything inspected and found sound, Changed stays empty pre-approval, Verdict names the top priority. Produce it even on a clean audit — a11y/perf/responsive coming back clean is the finding.
+**Close with a Craft Report** (`../ui-craft/references/review.md` → Craft Report), wrapping the findings table above — Checked states scope (a11y/perf/responsive, at which viewports), Passed carries anything inspected and found sound, Changed lists only authorized repairs, or stays empty for review-only requests, Verdict names the top priority. Produce it even on a clean audit — a11y/perf/responsive coming back clean is the finding.
 
 **Next step:** `/harden` — turn the findings into real production coverage (rung 1).

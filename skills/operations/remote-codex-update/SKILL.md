@@ -9,7 +9,7 @@ Update an offline or network-restricted remote Codex installation without assumi
 
 ## Authorization Boundary
 
-Treat remote extraction, persistent configuration changes, symlink switches, process restarts, and deletion as separate mutations. Diagnose first and obtain explicit confirmation for the exact targets before writing. A request to update does not authorize terminating active Codex processes or deleting old releases.
+Diagnose first and define the exact remote extraction, configuration, link-switch, restart and deletion scope. Existing explicit authorization for the same targets and effects remains valid; do not ask again at each implementation step. Confirm any newly introduced consequential scope before writing. A request to update does not authorize terminating active Codex processes or deleting old releases.
 
 Keep the existing release and a recoverable link or configuration backup by default. Never install globally with remote npm merely because npm happens to exist.
 

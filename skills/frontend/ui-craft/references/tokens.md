@@ -1,6 +1,6 @@
 # Token Spine
 
-Every design decision in a project references a three-layer token system established before any component is written. The layers are: **primitive** (raw values named for what they are), **semantic** (contextual meaning, switches between themes), and **component** (specific usage, created on demand). The scope is projects: throwaway prototypes and single standalone components may run on primitives alone — but the moment a second surface appears, build the spine.
+Use the existing token system. Add primitive, semantic and component layers only as current reuse, theming and component needs justify them. A new surface alone does not require all three layers, all categories or dark mode. The examples below are a menu for applicable needs, not mandatory setup before component edits.
 
 This 3-layer contract and the off-system-value definition (any color, radius, or spacing value not drawn from the token system) are the evaluation source for the `token-consistency` loop preset (see `../SKILL.md` → loops.md).
 
@@ -265,9 +265,9 @@ Specific usage. References semantics. Created on demand per component — not pr
 
 ---
 
-## Light + Dark: Both Intentional
+## Light + Dark: When Both Are Supported
 
-Dark mode is not the negation of light mode. Both are designed; neither is a fallback.
+Apply this section only when dark mode is requested or supported. Design each supported theme intentionally; do not add a second theme to satisfy this reference.
 
 > **The intentional-dark test:** if your dark mode maps `--text-primary` from `gray-900` to `gray-100` and stops there, you inverted — you didn't design. Real dark mode rebalances the entire surface stack.
 
@@ -279,7 +279,7 @@ Dark mode is not the negation of light mode. Both are designed; neither is a fal
 
 **The text rule.** Pure white (`#fff`) on dark backgrounds creates excessive halation on OLED screens. Use `--gray-50` or a warmer `oklch(97% 0.01 60)` as your lightest text value.
 
-**The transition rule.** Always declare `color-scheme: light dark` for native form controls to adopt the right system rendering. Provide `prefers-color-scheme` for users without a toggle; respect the user's explicit toggle when present — never override it with system preference once the user has made a choice.
+**The transition rule.** Declare `color-scheme` only for supported themes. For a product supporting both themes, use `light dark` and provide `prefers-color-scheme` where appropriate; respect an explicit theme toggle rather than overriding it with system preference.
 
 ```css
 /* Both modes in one block */
@@ -304,11 +304,11 @@ Dark mode is not the negation of light mode. Both are designed; neither is a fal
 
 ## Token Categories Required
 
-Every non-trivial UI needs all seven. Missing categories produce ad-hoc inline values that break theming.
+Use only categories needed by the requested surface. Unused categories are N/A; add a category when actual usage requires shared values.
 
 | Category | Primitive examples | Semantic examples | Notes |
 |---|---|---|---|
-| Color | `--gray-50` → `--gray-950`, `--accent-50` → `--accent-950` | `--text-primary`, `--surface-raised`, `--accent-bg` | Light + dark both required |
+| Color | `--gray-50` → `--gray-950`, `--accent-50` → `--accent-950` | `--text-primary`, `--surface-raised`, `--accent-bg` | Only supported or requested themes |
 | Spacing | `--space-xs` → `--space-4xl` | (typically used directly) | See `layout.md` for scale and rhythm rules |
 | Type | `--text-xs` → `--text-5xl`, `--leading-tight`, `--font-medium` | `--font-display`, `--font-body`, `--font-mono` | See `typography.md` for scale and letter-spacing rules |
 | Radii | `--radius-sm`, `--radius-md`, `--radius-lg`, `--radius-full` | `--radius-card`, `--radius-button`, `--radius-input` | Vary by element — uniform radius is the AI tell |
@@ -321,8 +321,8 @@ Every non-trivial UI needs all seven. Missing categories produce ad-hoc inline v
 ## When to Extend vs. Replace
 
 **If the project has a token system:**
-- **Extend** — add the missing layer or category. The most common gap is missing semantics: primitives exist, but nothing switches for dark mode and no surface stack is defined.
-- **Audit** — check dark mode is intentional (run the test above), semantic naming exists, all 7 categories are present.
+- **Extend** — add a layer or category only when required by current reuse or theming needs.
+- **Audit** — check relevant categories, naming and supported themes; do not flag unused layers or unrequested themes as missing features.
 - **Don't replace** unless the user explicitly asks. Token replacement is a multi-week refactor. Propose additions as patches, not rewrites.
 
 **If the project has nothing:**

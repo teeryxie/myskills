@@ -1,12 +1,14 @@
 ---
 name: ui-craft
-description: "Use for UI design and implementation work to avoid generic AI-looking interfaces. Provides anti-slop rules, a required discovery phase before coding, and guidance for layout, typography, color, motion, accessibility, dashboards, tables, landing pages, theming, and polish. Trigger when editing UI code or reviewing and refining components, pages, screens, layouts, animations, responsive behavior, or design systems."
+description: "Design or refine web UI with project-aware guidance on layout, typography, color and interaction. For local UI fixes, reuse existing design decisions and load only the relevant guidance; full discovery is for new surfaces or redesigns."
 argument-hint: "[action: build|animate|review|polish|audit] [target]"
 ---
 
 # UI Craft
 
-You are a design engineer. Every decision below is one you make deliberately and can defend — never a default you inherited.
+Use the project's existing design decisions as the starting point. Change them only when the current request or a concrete usability issue requires it.
+
+**Scope first:** For local fixes, preserve existing design, stack and tokens; skip full Discovery, brief creation, token-system setup and unrelated polish. For new complete surfaces or redesigns, use Discovery below. Review-only requests do not require design-choice approval. Stop when the requested outcome and relevant checks pass.
 
 ## The Ladder (use this when explaining ui-craft to the user)
 
@@ -21,9 +23,9 @@ One progression, four rungs. Never describe ui-craft as "layers" or "modes" — 
 
 `/sddesign` is **not** a rung — it is the express lane that walks rungs 1 to 3 for one big surface. When a pass finishes, name the natural next step (`/craft` → `/finalize`, `/brief` → `/tokens`, `/audit` → `/harden`).
 
-## Knobs (ask during Discovery, 1-10)
+## Knobs (use when relevant, 1-10)
 
-Knobs are **fallback defaults applied only when the user declines to specify**. When the user gives explicit guidance during Discovery — "make it dense", "minimal motion", "ship-fast" — those override the defaults. Knobs are not a starting position; they are a graceful fallback.
+Use existing project values first, explicit user preferences next where they change those values, and the defaults below for remaining routine decisions. Do not wait for the user to decline preferences before using defaults. Ask only about missing decisions that materially affect the result and cannot be inferred; never treat silence as required approval.
 
 - **CRAFT_LEVEL** (default 7) — refinement depth. 3 ships fast, 9 is pixel-perfect.
 - **MOTION_INTENSITY** (default 5) — 1 = hover only, 10 = scroll-triggered, magnetic, page transitions.
@@ -36,7 +38,7 @@ Behavior: **CRAFT_LEVEL 8+** → run Polish Pass ([review.md](references/review.
 
 The rules that make the biggest difference between "AI-generated" and "designed by a human":
 
-0. **Ask before assuming** — never default accent, font, or style. Analyze project, then ask. Use Knob defaults only when the user explicitly declines to specify.
+0. **Reuse before asking** — inspect relevant project decisions; ask only about unresolved choices that materially affect the result. Routine reversible choices may use stated assumptions.
 1. **Sentence case by default** — uppercase = template. Exception: 11-13px category labels with wide tracking — an eyebrow above every heading is template grammar; budget formula in [recipe-landing.md](references/recipe-landing.md) (Eyebrow budget).
 2. **90%+ neutral, one accent** — mostly black/white/gray; single brand color. NEVER *default* to blue — if your brand is blue, that's different.
 3. **Vary border-radius** — 6px inputs, 10px cards, 14px modals (steps from the radius token scale in [tokens.md](references/tokens.md)); uniform radii look stamped out.
@@ -50,7 +52,7 @@ The rules that make the biggest difference between "AI-generated" and "designed 
 11. **Every section earns its space** — if it doesn't answer a question or drive action, cut it.
 12. **One signature detail per UI** — subtle motif, layout break, custom markers, distinctive hover. On `/craft`, pick and **build** it in the first pass ([craft-intent.md](references/craft-intent.md)) — not only at polish.
 
-> **Before writing ANY code:** For non-trivial projects, run `/brief` and `/tokens` first — durable artifacts beat per-session re-derivation. Then run Stack Detection + Discovery Phase. Use existing tokens if any token system is present. If none exists, establish a minimal token set before writing components — at minimum: spacing scale, neutral ramp, one accent, two type sizes for body and display (see [layout.md](references/layout.md) and [color.md](references/color.md)). If preferences are missing, ask.
+> **Before building a new complete surface:** reuse existing brief and tokens. Create durable brief or token artifacts only when requested or necessary for this build. Establish only tokens used by the current surface. Local edits and reviews skip this setup.
 
 ## Routing
 
@@ -74,8 +76,7 @@ The rules that make the biggest difference between "AI-generated" and "designed 
 | Color / theming / dark mode (focused pass: `/colorize`) | [color.md](references/color.md) |
 | Accessibility / a11y audit (technical audit: `/audit`) | [accessibility.md](references/accessibility.md) |
 | UX critique, no code changes | Run `/critique` — [review.md](references/review.md) + [inspiration.md](references/inspiration.md) |
-| Production hardening (states, i18n, edge cases) | Run `/harden` — [state-design.md](references/state-design.md) + [coverage.md](references/coverage.md) |
-| "What's missing from this screen?" / completeness check on a table, settings, checkout, pricing, docs, invite, delete-confirm, onboarding | Call `ux_coverage` (MCP) or read [coverage.md](references/coverage.md) — the **completeness** axis, reported beside distinction, never folded into a score |
+| Production hardening (states, i18n, edge cases) | Run `/harden` — [state-design.md](references/state-design.md) |
 | Cut noise / simplify an over-built surface | Run `/distill` |
 | Redesign / modernize an existing site without losing brand, IA, or SEO | Run `/redesign` — audit first, preserve list, refresh/reskin/rebuild scope |
 | Amplify personality / "make it bolder" | Run `/bolder` — [craft-intent.md](references/craft-intent.md) |
@@ -118,7 +119,7 @@ Refusing with a pointer beats confident bad output. Silence produces the second 
 
 ---
 
-## Stack Detection (Always Run First)
+## Stack Detection (reuse known project context)
 
 Detect the styling approach from signals: Tailwind (`tailwind.config.*`, `@tailwind`), CSS Modules (`*.module.css`), styled-components/Emotion (`styled(...)`, `css\`...\``), CSS-in-JS (`*.styles.ts`, vanilla-extract, Stitches), SFC (`<style scoped>` in Vue/Svelte/Astro), or Vanilla CSS.
 
@@ -132,7 +133,7 @@ Detect the styling approach from signals: Tailwind (`tailwind.config.*`, `@tailw
 
 ---
 
-## Discovery Phase (Always Run First)
+## Discovery Phase (new surfaces or redesigns)
 
 Before applying any design decisions, discover what the project has and what the user wants. Never *default* to blue, Inter, or any style without checking — if the brand calls for blue, that's different.
 
@@ -140,7 +141,7 @@ Before applying any design decisions, discover what the project has and what the
 
 **Design Memory (`.ui-craft/` directory).** This is the project's typed design context. It replaces the single `brief.md` with a structured directory — all files are plain markdown, committable to git.
 
-**Always-load on every UI task** (small, define project taste/tokens):
+**Read when relevant and not already known in this session** (project taste/tokens):
 - `.ui-craft/brief.md` — product identity, design intent, audience, voice, constraints. See [references/brief.md](references/brief.md) for the format guide.
 - `.ui-craft/tokens.md` — the project's actual token decisions (colors, type, spacing, radius, shadows).
 
@@ -155,11 +156,11 @@ The brief includes **Learned constraints** — corrections the user made on this
 
 Scan for existing tokens: CSS variables (`--color-*`, `--font-*`, `--accent-*`), Tailwind config (`theme.extend.*`), globals.css, font imports, next/font, component library theme (shadcn, MUI), design-tokens files. Build an inventory (accent, fonts, radius, shadows). If the project has an intentional system, respect it. Don't override.
 
-If a token system is present but incomplete (no semantic layer, no intentional dark mode, missing categories), recommend `/tokens` to audit and fill gaps. Cross-ref [tokens.md](references/tokens.md) for the 3-layer contract.
+If tokens needed for the current change are missing, add the smallest compatible set. Do not recommend a whole-system audit or dark mode solely because unrelated categories are absent.
 
 ### Step 2: Ask the User (Quick Ask)
 
-If tokens are missing or ambiguous, ask in one compact prompt:
+For a new surface or redesign, ask only about unresolved decisions that materially affect the result. Omit questions already answered by the request or project. The following is an optional menu, not a required questionnaire:
 
 > "Before I build: (1) Design style — minimal, soft modern, sharp geometric, editorial, dark premium, or playful? (2) Accent color preference? (3) Font — clean sans-serif, geometric, humanist, monospace, or system? (4) Animation stack — Motion / GSAP / Three.js / none? (I'll load `references/stack.md` only if you opt in.)"
 
@@ -187,7 +188,7 @@ Pick **DESIGN_VARIANCE** and a **signature bet** in that line; full rationale, v
 
 ### The Anti-Slop Test
 
-Before shipping any UI, ask: "If someone said AI made this, would they believe it immediately?" If yes, start over.
+Before shipping, identify concrete issues in hierarchy, readability, accessibility or requested style. Fix them locally where possible; do not restart a surface based only on a subjective impression that it looks AI-generated.
 
 **Critical (immediately reads as AI):**
 - Identical card grids (icon + heading + text, 3-6x repeated)
@@ -321,9 +322,9 @@ Full easing curves, spring configs, stagger rules, and interaction rules → [mo
 
 ## Reference Files
 
-Tiered by signal. Tier 1 is required reading before writing any UI; lower tiers load on context.
+Load references by task scope. Tier 1 applies to new full-surface builds; local edits load only guidance needed for the change.
 
-### Tier 1 — Always load before writing UI
+### Tier 1 — Full-surface builds
 
 Two entries, because two is what a build actually loads. This list used to hold seven; build evals showed a passing dashboard opened one of them and a passing landing opened two, while both reached for the surface recipe that was filed a tier below. A required list that nobody reads is not a standard, it is a wish — so the list now names what carries the build, and everything else below states the trigger that pulls it in.
 
@@ -388,6 +389,5 @@ Same references as before, same weight when their trigger fires. Only the claim 
 | [heuristics.md](references/heuristics.md) | Nielsen's 10 + 6 design laws (Fitts, Hick, Doherty, Cleveland-McGill, Miller, Tesler) + 1-5 rubric. Load for `/heuristic`. |
 | [personas.md](references/personas.md) | 5 persona walkthroughs (first-timer / power / low-bandwidth / screen-reader / one-thumb). Load for `/heuristic --persona=<name>`. |
 | [state-design.md](references/state-design.md) | State lattice — idle / loading / empty / error / partial / conflict / offline. Load for `/unhappy`. |
-| [coverage.md](references/coverage.md) | UX coverage — the parts 12 screen archetypes need to be complete (data table, settings, search, detail view, first-run, billing, pricing, docs, checkout, onboarding, destructive confirm, invite). The **completeness** axis, not distinction. Load for `/harden`, or when asked what a screen is missing. **Prefer the `ux_coverage` MCP tool** — it returns one archetype instead of all twelve. Generated from `mcp/src/coverage-data.mjs`; do not edit by hand. |
 | [dataviz.md](references/dataviz.md) | Cleveland-McGill perceptual hierarchy, chart selection matrix, ColorBrewer/Okabe-Ito palettes, Tufte, direct labeling. Load when designing charts. |
 | [agents.md](references/agents.md) | Agent pack overview: `design-reviewer` + `a11y-auditor` roles, agent-vs-command guidance, and parallel verify-team usage pattern. Load when setting up or describing the verify team. |

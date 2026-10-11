@@ -8,6 +8,8 @@
 
 | 分类 | Skill | 用途 | 来源 |
 | --- | --- | --- | --- |
+| Engineering | `ponytail` | 最小完整改动、避免过度设计与审查负担 | [DietrichGebert/ponytail](https://github.com/DietrichGebert/ponytail)，MIT |
+| Engineering | `handoff` | 把任务状态、决策、失败尝试和验证整理成交接文件 | [firefly-hefeng/VESTI-SKILLS](https://github.com/firefly-hefeng/VESTI-SKILLS)，MIT；安装名适配 |
 | Research | `ccfa-paper-figures` | CCF-A/顶会论文数据图、架构图与 camera-ready 审查 | 自维护 |
 | Research | `drawio-diagram-builder` | 创建、复刻和迭代优化可编辑的 draw.io 科研与技术图 | [Will-hxw/drawio-diagram-builder-skill](https://github.com/Will-hxw/drawio-diagram-builder-skill) |
 | Research | `scientific-figure-generator` | AI/CS 论文科研示意图生成 | [Deepshare-Official/CCF-Figure](https://github.com/Deepshare-Official/CCF-Figure) |
@@ -255,3 +257,7 @@ bash tests/lark-skills.sh
 
 - [OpenAI Docs: Build skills](https://learn.chatgpt.com/docs/build-skills)
 - [Agent Skills specification](https://agentskills.io/specification)
+
+### 2026-10-11：Ponytail 与 Handoff
+
+仅安装官方 Ponytail 主 skill（不安装插件生命周期 hooks 或附加技能），可用 `$ponytail` 显式调用。Handoff 基于 VESTI 的 `vesti-handoff`，仅将 frontmatter 名称适配为 `handoff`，可用 `$handoff` 生成落盘交接文件，再让 Claude Code、pi 或新 Codex 会话读取该文件。上游提交与许可证见 UPSTREAMS.json 和各 skill 的 LICENSE。

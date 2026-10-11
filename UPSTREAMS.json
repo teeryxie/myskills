@@ -61,6 +61,24 @@
       "revision": "fca72fe58edad92d38a5eb5ce192454353b1a8d3",
       "committed_at": "2026-03-25T23:59:06+08:00",
       "subject": "Update README.md"
+    },
+    {
+      "repository": "DietrichGebert/ponytail",
+      "revision": "9b58c1ffb790c075ca32e70a89cf1d80588f4abf",
+      "checked_at": "2026-10-11",
+      "paths": [
+        "skills/ponytail"
+      ],
+      "installed_name": "ponytail"
+    },
+    {
+      "repository": "firefly-hefeng/VESTI-SKILLS",
+      "revision": "e6755fac768572896beacdf74eea71ca2a1f1b69",
+      "checked_at": "2026-10-11",
+      "paths": [
+        "skills/vesti-handoff"
+      ],
+      "installed_name": "handoff"
     }
   ],
   "retained_adaptations": [
@@ -69,5 +87,5 @@
     "UI UX Pro Max skill-relative invocation paths",
     "ui-craft sibling reference resolution"
   ],
-  "skill_count": 56
+  "skill_count": 80
 }

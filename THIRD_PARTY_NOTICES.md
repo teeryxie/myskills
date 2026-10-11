@@ -135,3 +135,10 @@ Source: [zarazhangrui/frontend-slides](https://github.com/zarazhangrui/frontend-
 Source: [ningzimu/image-to-editable-ppt-skill](https://github.com/ningzimu/image-to-editable-ppt-skill). The directory is a local runtime-compatible copy. It contains no credentials; API tokens remain runtime configuration only.
 
 Unless a skill directory says otherwise, no additional license grant is implied.
+
+## Ponytail and Handoff (2026-10-11)
+
+- `ponytail`: DietrichGebert/ponytail, commit `9b58c1ffb790c075ca32e70a89cf1d80588f4abf`, `skills/ponytail`. MIT; license retained in `skills/engineering/ponytail/LICENSE`.
+- `handoff`: firefly-hefeng/VESTI-SKILLS, commit `e6755fac768572896beacdf74eea71ca2a1f1b69`, `skills/vesti-handoff`. MIT; license retained in `skills/engineering/handoff/LICENSE`.
+
+Ponytail includes only the main skill, without plugin hooks. Handoff retains the VESTI workflow; only its frontmatter name is changed from vesti-handoff to handoff.
